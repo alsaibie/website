@@ -7,7 +7,8 @@ import EducationSection from "@components/resume/EducationSection.astro";
 import AcademicExperienceSection from "@components/resume/AcademicExperienceSection.astro";
 import LinkedInExperienceSection from "@components/resume/LinkedInExperienceSection.astro";
 import PublicationsSection from "@components/resume/PublicationsSection.astro";
-import SkillsAwardsSection from "@components/resume/SkillsAwardsSection.astro";
+import SkillsSection from "@components/resume/SkillsSection.astro";
+// import AwardsSection from "@components/resume/AwardsSection.astro";
 import { 
   avatarData,
   education, 
@@ -22,7 +23,7 @@ import {
 <Layout title={RESUME.TITLE} description={RESUME.DESCRIPTION}>
   <Container>
     <div class="animate">
-      <ResumeHeader title="Resume" avatar={avatarData} />
+      <ResumeHeader title="" avatar={avatarData} />
       
       <div class="space-y-8">
         <EducationSection education={education} />
@@ -41,7 +42,9 @@ import {
         
         <PublicationsSection categories={publications} />
         
-        <SkillsAwardsSection skillCategories={skillCategories} awards={awards} />
+        <SkillsSection skillCategories={skillCategories} />
+        
+        <!-- <AwardsSection awards={awards} /> -->
       </div>
     </div>
   </Container>

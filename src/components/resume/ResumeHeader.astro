@@ -7,8 +7,15 @@ export interface Props {
     alt: string;
     name?: string;
     title?: string;
-    email?: string;
+    emails?: {
+      personal?: string;
+      academic?: string;
+    };
     location?: string;
+    coordinates?: {
+      lat: number;
+      lon: number;
+    };
   };
 }
 
@@ -16,6 +23,17 @@ const { title, showPrintButton = true, avatar } = Astro.props;
 ---
 
 <div class="my-10 space-y-6">
+  {showPrintButton && (
+    <div class="flex justify-end">
+      <button
+        onclick="window.print()"
+        class="rounded-lg bg-black/5 px-4 py-2 text-sm transition-colors hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15"
+      >
+        Print/Save PDF
+      </button>
+    </div>
+  )}
+  
   {avatar && (
     <div class="avatar-section flex flex-col md:flex-row items-center md:items-start gap-6 mb-8">
       <div class="flex-shrink-0">
@@ -33,15 +51,56 @@ const { title, showPrintButton = true, avatar } = Astro.props;
           <h2 class="text-xl text-black/70 dark:text-white/70 mb-3">{avatar.title}</h2>
         )}
         <div class="space-y-1 text-sm text-black/60 dark:text-white/60">
-          {avatar.email && (
-            <div class="flex items-center justify-center md:justify-start gap-2">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-              </svg>
-              <a href={`mailto:${avatar.email}`} class="hover:text-black dark:hover:text-white transition-colors">
-                {avatar.email}
-              </a>
+          {avatar.emails && (avatar.emails.personal || avatar.emails.academic) && (
+            <div class="space-y-1">
+              {avatar.emails.personal && (
+                <div class="flex items-center justify-center md:justify-start gap-2">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                  </svg>
+                  <span class="text-xs text-black/40 dark:text-white/40 mr-1">Personal:</span>
+                  <div class="email-container hover:text-black dark:hover:text-white transition-colors cursor-pointer" 
+                       data-email={btoa(avatar.emails.personal)}>
+                    <span class="email-display">
+                      {avatar.emails.personal.split('@').map((part, index) => (
+                        index === 0 ? (
+                          <>
+                            <span class="font-semibold">{part}</span>
+                            <span class="text-black/30 dark:text-white/30"> [at] </span>
+                          </>
+                        ) : (
+                          <span class="font-semibold">{part}</span>
+                        )
+                      ))}
+                    </span>
+                  </div>
+                </div>
+              )}
+              {avatar.emails.academic && (
+                <div class="flex items-center justify-center md:justify-start gap-2">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                  </svg>
+                  <span class="text-xs text-black/40 dark:text-white/40 mr-1">Academic:</span>
+                  <div class="email-container hover:text-black dark:hover:text-white transition-colors cursor-pointer" 
+                       data-email={btoa(avatar.emails.academic)}>
+                    <span class="email-display">
+                      {avatar.emails.academic.split('@').map((part, index) => (
+                        index === 0 ? (
+                          <>
+                            <span class="font-semibold">{part}</span>
+                            <span class="text-black/30 dark:text-white/30"> [at] </span>
+                          </>
+                        ) : (
+                          <span class="font-semibold">{part}</span>
+                        )
+                      ))}
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
           )}
           {avatar.location && (
@@ -49,7 +108,18 @@ const { title, showPrintButton = true, avatar } = Astro.props;
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
               </svg>
-              <span>{avatar.location}</span>
+              <a 
+                href={avatar.coordinates 
+                  ? `https://www.openstreetmap.org/?mlat=${avatar.coordinates.lat}&mlon=${avatar.coordinates.lon}&zoom=12`
+                  : `https://www.openstreetmap.org/search?query=${encodeURIComponent(avatar.location)}`
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-black dark:hover:text-white transition-colors hover:underline"
+                title={`View ${avatar.location} on OpenStreetMap`}
+              >
+                {avatar.location}
+              </a>
             </div>
           )}
         </div>
@@ -57,17 +127,46 @@ const { title, showPrintButton = true, avatar } = Astro.props;
     </div>
   )}
   
-  <div class="flex flex-wrap items-center justify-between gap-2">
-    <div class="flex flex-wrap items-center gap-2">
-      <h1 class="text-3xl font-semibold text-black dark:text-white">{title}</h1>
+  {title && (
+    <div class="flex flex-wrap items-center justify-between gap-2">
+      <div class="flex flex-wrap items-center gap-2">
+        <h1 class="text-3xl font-semibold text-black dark:text-white">{title}</h1>
+      </div>
     </div>
-    {showPrintButton && (
-      <button
-        onclick="window.print()"
-        class="rounded-lg bg-black/5 px-4 py-2 text-sm transition-colors hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15"
-      >
-        Print/Save PDF
-      </button>
-    )}
-  </div>
+  )}
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const emailContainers = document.querySelectorAll('.email-container');
+    
+    emailContainers.forEach((container: Element) => {
+      container.addEventListener('click', function(this: HTMLElement) {
+        const encodedEmail = this.getAttribute('data-email');
+        if (encodedEmail) {
+          try {
+            const decodedEmail = atob(encodedEmail);
+            window.location.href = `mailto:${decodedEmail}`;
+          } catch (e) {
+            console.error('Error decoding email:', e);
+          }
+        }
+      });
+      
+      // Add hover effect to show it's clickable
+      container.addEventListener('mouseenter', function(this: HTMLElement) {
+        const emailDisplay = this.querySelector('.email-display') as HTMLElement;
+        if (emailDisplay) {
+          emailDisplay.style.textDecoration = 'underline';
+        }
+      });
+      
+      container.addEventListener('mouseleave', function(this: HTMLElement) {
+        const emailDisplay = this.querySelector('.email-display') as HTMLElement;
+        if (emailDisplay) {
+          emailDisplay.style.textDecoration = 'none';
+        }
+      });
+    });
+  });
+</script>

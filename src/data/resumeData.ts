@@ -1,13 +1,21 @@
 // Resume data - replace with your actual information
 
 export const avatarData = {
-  src: "/favicon.ico", // Replace with your actual avatar image path
+  src: "/avatar.jpg",
   alt: "Ali AlSaibie",
   name: "Ali AlSaibie",
   title: "Assistant Professor | Kuwait University",
-  email: "ali@alsaibie.com",
-  location: "Kuwait"
+  emails: {
+    personal: "ali@alsaibie.com",
+    academic: "ali.alsaibie@ku.edu.kw"
+  },
+  location: "Kuwait",
+  coordinates: {
+    lat: 29.255978,
+    lon: 47.894114
+  }
 };
+
 
 export const education = [
   {
@@ -194,83 +202,103 @@ export const industryExperience = [
 
 export const publications = [
   {
-    title: "Journal Articles",
+    title: "Selected Journal Articles",
     publications: [
       {
-        authors: "AlSaibie, A., Smith, J., & Johnson, M.",
-        title: "Advanced Control Strategies for Autonomous Mobile Robots",
-        venue: "IEEE Transactions on Robotics",
-        year: 2024,
-        pages: "40(3), 123-145",
-        doi: "10.1109/example"
+        authors: "A Alshaya, A AlSaibie, A Alshayji",
+        title: "Three-dimensional sloshing control of a planar-conveyed rectangular container using an adjustable-smooth robust command",
+        venue: "Control Engineering Practice",
+        year: 2025,
+        pages: "164, 106503",
+        doi: "10.1016/j.conengprac.2025.106503"
       },
-      {
-        authors: "AlSaibie, A. & Williams, K.",
-        title: "Machine Learning Approaches in Mechatronic System Design", 
-        venue: "Journal of Mechatronics",
-        year: 2023,
-        pages: "15(2), 78-92",
-        doi: "10.1016/example"
-      }
     ]
   },
   {
-    title: "Conference Papers",
+    title: "Selected Conference Papers",
     publications: [
       {
-        authors: "AlSaibie, A., Davis, R., & Chen, L.",
-        title: "Real-time Path Planning for Multi-Robot Systems",
-        venue: "Proceedings of the IEEE International Conference on Robotics and Automation (ICRA)",
-        year: 2024,
-        pages: "pp. 1234-1240",
-        location: "Tokyo, Japan"
+        authors: "Ali AlSaibie, Arto Kivila, James Potter, William Singhose",
+        title: "Fostering global collaboration between engineering students through a robotic design competition",
+        venue: "Proceedings of the Hawaii University International Conference of Science, Technology, Engineering, Math & Education",
+        year: 2014,
+        location: "Honolulu, Hawaii",
       },
       {
-        authors: "AlSaibie, A.",
-        title: "Sensor Fusion Techniques for Autonomous Navigation",
-        venue: "Proceedings of the International Conference on Intelligent Robots and Systems (IROS)",
-        year: 2023, 
-        pages: "pp. 567-573",
-        location: "Detroit, MI"
+        authors: "A AlSaibie, W Singhose",
+        title: "Experimental testing of liquid slosh suppression in a suspended container with compound-pendulum dynamics",
+        venue: "Proceedings of the 2013 9th Asian Control Conference (ASCC)",
+        year: 2013, 
+        location: "Istanbul, Turkey",
+        doi: "10.1109/ASCC.2013.6606200"
       }
     ]
   },
-  {
-    title: "Book Chapters",
-    publications: [
-      {
-        authors: "AlSaibie, A.",
-        title: "Chapter 12: Modern Approaches to Robot Control",
-        venue: "Handbook of Robotics Engineering",
-        year: 2023,
-        pages: "pp. 301-325",
-        location: "Springer International Publishing"
-      }
-    ]
-  }
+//   {
+//     title: "Book Chapters",
+//     publications: [
+//       {
+//         authors: "AlSaibie, A.",
+//         title: "Chapter 12: Modern Approaches to Robot Control",
+//         venue: "Handbook of Robotics Engineering",
+//         year: 2023,
+//         pages: "pp. 301-325",
+//         location: "Springer International Publishing"
+//       }
+//     ]
+//   }
 ];
 
 export const skillCategories = [
-  {
-    name: "Programming",
-    skills: ["Python", "MATLAB", "C++", "JavaScript"],
-    color: "blue"
-  },
-  {
-    name: "Tools & Frameworks", 
-    skills: ["ROS", "SolidWorks", "Simulink", "Arduino"],
-    color: "green"
-  },
-  {
-    name: "Technologies",
-    skills: ["Machine Learning", "Computer Vision", "Control Systems", "Robotics"],
-    color: "purple"
-  }
+    {
+        name: "Design, Manufacturing & Rapid Prototyping",
+        skills: [
+            "CAD/CAM: Solidworks, Fusion 360, AutoCAD", 
+            "Conventional Machining: Manual Lathes, Milling Machines", 
+            "CNC Machining: Fanuc, Tormach", 
+            "Additive Manufacturing: FFF, SLS, SLA", 
+            "PCB Design & Fabrication: Altium Designer, Eagle CAD, KiCAD"
+        ],
+        color: "blue"
+    },
+    {
+        name: "Software & Systems",
+        skills: [
+            "Programming Languages: Python, C/C++, Julia, MATLAB", 
+            "Robotics Frameworks: ROS/ROS2, MicroROS, Optitrack Motive, PX4, Ardupilot, Mujoco, CoppeliaSim", 
+            "Computer Vision: OpenCV, MATLAB Image Processing", 
+            "Embedded Systems: Arduino, Raspberry Pi, Jetson, STM32 HAL & Cube, TI Tiva C, Nuttx, FreeRTOS", 
+            "Industrial Automation: Siemens PLCs, Siemens Simotion",
+            "Web Development: Drupal (Site Building), Django, CSS, HTML",
+            "Development Tools & Infrastructure: Git/GitHub, Docker, CI/CD Pipelines",
+            "Cloud Platforms: AWS, Digital Ocean"
+        ],
+        color: "purple"
+    },
+    {
+        name: "Engineering Analysis & Simulation",
+        skills: [
+            "Finite Element Analysis: ANSYS-CFX, COMSOL Multiphysics", 
+            "System Dynamics & Control: ODE/PDE Solvers, Controller Modeling and Design", 
+            "Motion Control: Servo Systems, PID Controllers, FOC Controllers", 
+            "Vibration Analysis: Condition Monitoring, Signal Processing"
+        ],
+        color: "orange"
+    },
+    {
+        name: "Data Science & Machine Learning",
+        skills: [
+            "Data Analysis: Python (Pandas, NumPy, Matplotlib, Seaborn)",
+            "Machine Learning: Scikit-learn, Statistical Analysis, Regression Models",
+            "Deep Learning: TensorFlow, PyTorch, Neural Networks",
+            "Data Visualization: Plotly, Jupyter Notebooks",
+        ],
+        color: "green"
+    }
 ];
 
 export const awards = [
-  "Best Paper Award, ICRA 2024",
-  "NSF Graduate Research Fellowship (2020-2023)", 
-  "Dean's List (2018-2020)",
-  "IEEE Student Member of the Year (2019)"
+  "Placeholder Award 1",
+  "Placeholder Award 2",
+  "Placeholder Award 3"
 ];

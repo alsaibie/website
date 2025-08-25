@@ -20,6 +20,18 @@ export interface Props {
 }
 
 const { categories } = Astro.props;
+
+// Function to get background color based on category type
+function getCategoryColor(categoryTitle: string): string {
+  const title = categoryTitle.toLowerCase();
+  if (title.includes('conference')) {
+    return 'bg-yellow-50 dark:bg-yellow-950/20 border-yellow-200 dark:border-yellow-800/30';
+  } else if (title.includes('journal')) {
+    return 'bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800/30';
+  } else {
+    return 'bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/20';
+  }
+}
 ---
 
 <section class="animate space-y-4">
@@ -32,7 +44,7 @@ const { categories } = Astro.props;
       <h3 class="text-lg font-semibold text-black/80 dark:text-white/80">{category.title}</h3>
       <div class="space-y-3">
         {category.publications.map((pub) => (
-          <div class="bg-black/5 dark:bg-white/5 rounded-lg p-4">
+          <div class={`rounded-lg border p-4 transition-colors hover:shadow-sm ${getCategoryColor(category.title)}`}>
             <p class="text-sm">
               {pub.authors} ({pub.year}). 
               "{pub.title}" 
