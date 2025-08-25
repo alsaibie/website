@@ -7,6 +7,7 @@ import EducationSection from "@components/resume/EducationSection.astro";
 import AcademicExperienceSection from "@components/resume/AcademicExperienceSection.astro";
 import LinkedInExperienceSection from "@components/resume/LinkedInExperienceSection.astro";
 import PublicationsSection from "@components/resume/PublicationsSection.astro";
+import CoursesSection from "@components/resume/CoursesSection.astro";
 import SkillsSection from "@components/resume/SkillsSection.astro";
 // import AwardsSection from "@components/resume/AwardsSection.astro";
 import { 
@@ -14,7 +15,8 @@ import {
   education, 
   academicExperience, 
   industryExperience, 
-  publications, 
+  publications,
+  courses, 
   skillCategories, 
   awards 
 } from "@data/resumeData";
@@ -41,6 +43,8 @@ import {
         />
         
         <PublicationsSection categories={publications} />
+        
+        <CoursesSection courses={courses} />
         
         <SkillsSection skillCategories={skillCategories} />
         

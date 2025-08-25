@@ -249,6 +249,83 @@ export const publications = [
 //   }
 ];
 
+export const courses = [
+  {
+    category: "Assistant Professor, Kuwait University (2019 – Current)",
+    items: [
+      {
+        code: "ME 554",
+        title: "Special Topics in Mechanical Design: Robotics",
+        semester: "F24",
+      },
+      {
+        code: "ME 459",
+        title: "Engineering Design (Capstone)",
+        semester: "F21, S22, S24, S25",
+      },
+      {
+        code: "ME 417",
+        title: "Control of Mechanical Systems", 
+        semester: "F19, S20, SS20, F20, S21",
+        description: "https://alsaibie.github.io/me417/"
+      },
+      {
+        code: "ME 319",
+        title: "Mechatronics",
+        semester: "S19, S20, S21, S22",
+        description: "https://alsaibie.github.io/me319/"
+      },
+      {
+        code: "ENG 203",
+        title: "Dynamics",
+        semester: "S19, F19, F20, SS21, F21, F23, SS24, SS25",
+        description: "Summer 2021 Lectures"
+      },
+      {
+        code: "ENG 307",
+        title: "Numerical Methods and Programming for Engineers",
+        semester: "F19, F23, S24",
+      },
+      {
+        code: "ENG 259",
+        title: "Introduction to Engineering Design",
+        semester: "S25",
+      },
+      {
+        code: "ENG 104",
+        title: "Engineering Graphics",
+        semester: "F24",
+      }
+    ]
+  },
+  {
+    category: "Graduate Teaching Assistant, Georgia Institute of Technology (2015-2018)",
+    items: [
+      {
+        code: "ME 4447/6405",
+        title: "Introduction to Mechatronics",
+        semester: "F15, F16",
+        credits: 0,
+        description: "Lead TA"
+      },
+      {
+        code: "ME 6408",
+        title: "Advanced Mechatronics",
+        semester: "S16, S17, S18",
+        credits: 0,
+        description: "Lead TA"
+      },
+      {
+        code: "ME 6404",
+        title: "Advanced Control Design and Implementation",
+        semester: "F17",
+        credits: 0,
+        description: "TA"
+      }
+    ]
+  }
+];
+
 export const skillCategories = [
     {
         name: "Design, Manufacturing & Rapid Prototyping",
