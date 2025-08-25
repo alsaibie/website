@@ -200,6 +200,9 @@ export const industryExperience = [
 
 ];
 
+//
+// -------- PUBLICATIONS --------
+//
 export const publications = [
   {
     title: "Selected Journal Articles",
@@ -326,23 +329,27 @@ export const courses = [
   }
 ];
 
+//
+// ------------- SKILLS -------------
+//
 export const skillCategories = [
     {
         name: "Design, Manufacturing & Rapid Prototyping",
         skills: [
             "CAD/CAM: Solidworks, Fusion 360, AutoCAD", 
             "Conventional Machining: Manual Lathes, Milling Machines", 
-            "CNC Machining: Fanuc, Tormach", 
+            "CNC Machining & Cutting: Fanuc, Tormach, Omax, Lightburn, Cypcut", 
             "Additive Manufacturing: FFF, SLS, SLA", 
-            "PCB Design & Fabrication: Altium Designer, Eagle CAD, KiCAD"
+            "PCB Design & Fabrication: Altium Designer, Eagle CAD, KiCAD",
+            "Other Prototyping: Woodworking, Rubber Molding, Powder Coating",
         ],
         color: "blue"
     },
     {
         name: "Software & Systems",
         skills: [
-            "Programming Languages: Python, C/C++, Julia, MATLAB", 
-            "Robotics Frameworks: ROS/ROS2, MicroROS, Optitrack Motive, PX4, Ardupilot, Mujoco, CoppeliaSim", 
+            "Programming & Scripting Languages: Python, C/C++, Julia, MATLAB, Structured Text", 
+            "Robotics & OS Frameworks: ROS/ROS2, MicroROS, Optitrack Motive, PX4, Ardupilot, Mujoco, CoppeliaSim, Qt", 
             "Computer Vision: OpenCV, MATLAB Image Processing", 
             "Embedded Systems: Arduino, Raspberry Pi, Jetson, STM32 HAL & Cube, TI Tiva C, Nuttx, FreeRTOS", 
             "Industrial Automation: Siemens PLCs, Siemens Simotion",
