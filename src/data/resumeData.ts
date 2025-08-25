@@ -254,7 +254,7 @@ export const publications = [
 
 export const courses = [
   {
-    category: "Assistant Professor, Kuwait University (2019 – Current)",
+    category: "Assistant Professor, Kuwait University (2019 - Current)",
     items: [
       {
         code: "ME 554",
@@ -282,7 +282,7 @@ export const courses = [
         code: "ENG 203",
         title: "Dynamics",
         semester: "S19, F19, F20, SS21, F21, F23, SS24, SS25",
-        description: "Summer 2021 Lectures"
+        // description: "Summer 2021 Lectures"
       },
       {
         code: "ENG 307",
@@ -302,28 +302,28 @@ export const courses = [
     ]
   },
   {
-    category: "Graduate Teaching Assistant, Georgia Institute of Technology (2015-2018)",
+    category: "GTA, Georgia Institute of Technology (2015-2018)",
     items: [
       {
         code: "ME 4447/6405",
         title: "Introduction to Mechatronics",
         semester: "F15, F16",
         credits: 0,
-        description: "Lead TA"
+        description: "Lead Teaching Assistant"
       },
       {
         code: "ME 6408",
         title: "Advanced Mechatronics",
         semester: "S16, S17, S18",
         credits: 0,
-        description: "Lead TA"
+        description: "Lead Teaching Assistant"
       },
       {
         code: "ME 6404",
         title: "Advanced Control Design and Implementation",
         semester: "F17",
         credits: 0,
-        description: "TA"
+        description: "Teaching Assistant"
       }
     ]
   }
