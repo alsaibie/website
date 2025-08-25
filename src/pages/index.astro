@@ -7,7 +7,7 @@ import Link from "@components/Link.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
-const blog = (await getCollection("blog"))
+const engineering = (await getCollection("engineering"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
@@ -46,7 +46,7 @@ const projects: CollectionEntry<"projects">[] = (
                   >Pagefind</Link
                 > for search, <Link href="https://giscus.app">Giscus</Link> for comments,
                 and more. For a full list of changes, see this <Link
-                  href="/blog/00-micro-changelog">blog post</Link
+                  href="/engineering/00-micro-changelog">blog post</Link
                 >.
               </p>
             </span>
@@ -73,11 +73,11 @@ const projects: CollectionEntry<"projects">[] = (
             <h2 class="font-semibold text-black dark:text-white">
               Latest posts
             </h2>
-            <Link href="/blog"> See all posts </Link>
+            <Link href="/engineering"> See all posts </Link>
           </div>
           <ul class="not-prose flex flex-col gap-4">
             {
-              blog.map((post) => (
+              engineering.map((post) => (
                 <li>
                   <ArrowCard entry={post} />
                 </li>

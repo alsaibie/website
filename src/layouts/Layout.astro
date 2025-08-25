@@ -8,13 +8,15 @@ import { SITE } from "@consts";
 type Props = {
   title: string;
   description: string;
+  language?: string;
 };
 
-const { title, description } = Astro.props;
+const { title, description, language = 'en' } = Astro.props;
+const isRtl = language === 'ar';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={language} dir={isRtl ? 'rtl' : 'ltr'} class={isRtl ? 'rtl' : ''}>
   <head>
     <Head title={`${title} | ${SITE.TITLE}`} description={description} />
   </head>

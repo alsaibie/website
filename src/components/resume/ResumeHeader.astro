@@ -1,0 +1,73 @@
+---
+export interface Props {
+  title: string;
+  showPrintButton?: boolean;
+  avatar?: {
+    src: string;
+    alt: string;
+    name?: string;
+    title?: string;
+    email?: string;
+    location?: string;
+  };
+}
+
+const { title, showPrintButton = true, avatar } = Astro.props;
+---
+
+<div class="my-10 space-y-6">
+  {avatar && (
+    <div class="avatar-section flex flex-col md:flex-row items-center md:items-start gap-6 mb-8">
+      <div class="flex-shrink-0">
+        <img 
+          src={avatar.src} 
+          alt={avatar.alt}
+          class="w-32 h-32 rounded-full object-cover border-4 border-black/10 dark:border-white/20"
+        />
+      </div>
+      <div class="flex-1 text-center md:text-left">
+        {avatar.name && (
+          <h1 class="text-4xl font-bold text-black dark:text-white mb-2">{avatar.name}</h1>
+        )}
+        {avatar.title && (
+          <h2 class="text-xl text-black/70 dark:text-white/70 mb-3">{avatar.title}</h2>
+        )}
+        <div class="space-y-1 text-sm text-black/60 dark:text-white/60">
+          {avatar.email && (
+            <div class="flex items-center justify-center md:justify-start gap-2">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+              </svg>
+              <a href={`mailto:${avatar.email}`} class="hover:text-black dark:hover:text-white transition-colors">
+                {avatar.email}
+              </a>
+            </div>
+          )}
+          {avatar.location && (
+            <div class="flex items-center justify-center md:justify-start gap-2">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>{avatar.location}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )}
+  
+  <div class="flex flex-wrap items-center justify-between gap-2">
+    <div class="flex flex-wrap items-center gap-2">
+      <h1 class="text-3xl font-semibold text-black dark:text-white">{title}</h1>
+    </div>
+    {showPrintButton && (
+      <button
+        onclick="window.print()"
+        class="rounded-lg bg-black/5 px-4 py-2 text-sm transition-colors hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15"
+      >
+        Print/Save PDF
+      </button>
+    )}
+  </div>
+</div>

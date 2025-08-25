@@ -1,0 +1,80 @@
+---
+import { RESUME } from "@consts";
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import ResumeHeader from "@components/resume/ResumeHeader.astro";
+import EducationSection from "@components/resume/EducationSection.astro";
+import AcademicExperienceSection from "@components/resume/AcademicExperienceSection.astro";
+import LinkedInExperienceSection from "@components/resume/LinkedInExperienceSection.astro";
+import PublicationsSection from "@components/resume/PublicationsSection.astro";
+import SkillsAwardsSection from "@components/resume/SkillsAwardsSection.astro";
+import { 
+  avatarData,
+  education, 
+  academicExperience, 
+  industryExperience, 
+  publications, 
+  skillCategories, 
+  awards 
+} from "@data/resumeData";
+---
+
+<Layout title={RESUME.TITLE} description={RESUME.DESCRIPTION}>
+  <Container>
+    <div class="animate">
+      <ResumeHeader title="Resume" avatar={avatarData} />
+      
+      <div class="space-y-8">
+        <EducationSection education={education} />
+        
+        <AcademicExperienceSection 
+          title="Academic Experience" 
+          experiences={academicExperience} 
+          borderColor="blue-500/50" 
+        />
+        
+        <LinkedInExperienceSection 
+          title="Industry Experience" 
+          experiences={industryExperience} 
+          borderColor="green-500/50" 
+        />
+        
+        <PublicationsSection categories={publications} />
+        
+        <SkillsAwardsSection skillCategories={skillCategories} awards={awards} />
+      </div>
+    </div>
+  </Container>
+</Layout>
+
+<style>
+  @media print {
+    .animate {
+      transform: none !important;
+      opacity: 1 !important;
+    }
+    
+    button {
+      display: none !important;
+    }
+    
+    section {
+      break-inside: avoid;
+    }
+    
+    h2, h3 {
+      break-after: avoid;
+    }
+    
+    /* Avatar print styles */
+    img {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    
+    /* Ensure avatar section doesn't break */
+    .avatar-section {
+      break-inside: avoid;
+    }
+  }
+</style>

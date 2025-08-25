@@ -1,0 +1,113 @@
+---
+export interface ExperienceItem {
+  title: string;
+  organization: string;
+  department?: string;
+  location?: string;
+  startYear: string;
+  endYear?: string;
+  current?: boolean;
+  responsibilities: string[];
+}
+
+export interface GroupedExperience {
+  organization: string;
+  location?: string;
+  mostRecentEndYear: number;
+  positions: ExperienceItem[];
+}
+
+export interface Props {
+  title: string;
+  experiences: ExperienceItem[];
+  borderColor?: string;
+}
+
+const { title, experiences, borderColor = "blue-500/50" } = Astro.props;
+
+// Helper function to get numeric year for sorting
+function getNumericYear(yearStr: string): number {
+  if (yearStr.toLowerCase() === 'present') return new Date().getFullYear();
+  // Extract year from strings like "Jun 2014" or "2014"
+  const match = yearStr.match(/\d{4}/);
+  return match ? parseInt(match[0]) : 0;
+}
+
+// Group experiences by organization
+const groupedExperiences = experiences.reduce((acc: { [key: string]: GroupedExperience }, exp) => {
+  if (!acc[exp.organization]) {
+    acc[exp.organization] = {
+      organization: exp.organization,
+      location: exp.location, // Use location from first entry as organization location
+      mostRecentEndYear: 0,
+      positions: []
+    };
+  }
+  
+  acc[exp.organization].positions.push(exp);
+  
+  // Update most recent end year for sorting
+  const endYear = getNumericYear(exp.current ? 'present' : exp.endYear || exp.startYear);
+  if (endYear > acc[exp.organization].mostRecentEndYear) {
+    acc[exp.organization].mostRecentEndYear = endYear;
+    // Update location to the most recent position's location
+    acc[exp.organization].location = exp.location;
+  }
+  
+  return acc;
+}, {});
+
+// Sort organizations by most recent engagement
+const sortedOrganizations = Object.values(groupedExperiences)
+  .sort((a, b) => b.mostRecentEndYear - a.mostRecentEndYear);
+
+// Sort positions within each organization by start date (most recent first)
+sortedOrganizations.forEach(org => {
+  org.positions.sort((a, b) => getNumericYear(b.startYear) - getNumericYear(a.startYear));
+});
+---
+
+<section class="animate space-y-4">
+  <h2 class="text-2xl font-bold text-black dark:text-white border-b border-black/10 dark:border-white/20 pb-2">
+    {title}
+  </h2>
+  <div class="space-y-8">
+    {sortedOrganizations.map((org) => (
+      <div class={`border-l-4 border-${borderColor} pl-4`}>
+        <!-- Organization Header with Location -->
+        <div class="mb-4">
+          <h3 class="text-xl font-semibold text-black dark:text-white">{org.organization}</h3>
+          {org.location && (
+            <p class="text-sm text-black/60 dark:text-white/60">{org.location}</p>
+          )}
+        </div>
+        
+        <!-- Positions within organization -->
+        <div class="space-y-4 ml-4">
+          {org.positions.map((position, index) => (
+            <div class="border-l-2 border-black/10 dark:border-white/20 pl-4">
+              <div class="flex flex-wrap items-start justify-between gap-2">
+                <div class="flex-1">
+                  <h4 class="text-lg font-medium text-black dark:text-white">{position.title}</h4>
+                  {position.department && (
+                    <p class="text-sm text-black/70 dark:text-white/70 mt-1">{position.department}</p>
+                  )}
+                </div>
+                <span class="text-sm text-black/60 dark:text-white/60 flex-shrink-0">
+                  {position.startYear} - {position.current ? "Present" : position.endYear}
+                </span>
+              </div>
+              {position.responsibilities.length > 0 && (
+                <ul class="mt-2 space-y-1 text-sm text-black/80 dark:text-white/80">
+                  {position.responsibilities.map((responsibility) => (
+                    <li>• {responsibility}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

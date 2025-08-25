@@ -1,0 +1,53 @@
+---
+export interface Publication {
+  authors: string;
+  title: string;
+  venue: string;
+  year: number;
+  pages?: string;
+  location?: string;
+  doi?: string;
+  url?: string;
+}
+
+export interface PublicationCategory {
+  title: string;
+  publications: Publication[];
+}
+
+export interface Props {
+  categories: PublicationCategory[];
+}
+
+const { categories } = Astro.props;
+---
+
+<section class="animate space-y-4">
+  <h2 class="text-2xl font-bold text-black dark:text-white border-b border-black/10 dark:border-white/20 pb-2">
+    Publications
+  </h2>
+  
+  {categories.map((category) => (
+    <div class="space-y-4">
+      <h3 class="text-lg font-semibold text-black/80 dark:text-white/80">{category.title}</h3>
+      <div class="space-y-3">
+        {category.publications.map((pub) => (
+          <div class="bg-black/5 dark:bg-white/5 rounded-lg p-4">
+            <p class="text-sm">
+              {pub.authors} ({pub.year}). 
+              "{pub.title}" 
+              <em>{pub.venue}</em>
+              {pub.pages && `, ${pub.pages}`}
+              {pub.location && `, ${pub.location}`}.
+              {pub.doi && (
+                <a href={pub.url || `https://doi.org/${pub.doi}`} class="text-blue-600 dark:text-blue-400 hover:underline ml-2">
+                  DOI
+                </a>
+              )}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</section>
