@@ -31,22 +31,22 @@ const { courses } = Astro.props;
           {category.category}
         </h3>
         
-        <div class="grid gap-4">
+        <div class="grid gap-3">
           {category.items.map((course) => (
-            <div class="bg-black/5 dark:bg-white/5 rounded-lg p-4 border border-black/10 dark:border-white/10">
-              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+            <div class="bg-black/5 dark:bg-white/5 rounded px-4 py-3 border border-black/10 dark:border-white/10">
+              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-1">
                 <div class="flex-1">
-                  <h4 class="font-semibold text-black dark:text-white">
+                  <h4 class="font-semibold text-black/90 dark:text-white/90 mb-1">
                     {course.code} {course.title}
                   </h4>
                 </div>
-                <div class="text-sm text-black/60 dark:text-white/60">
+                <div class="text-xs text-black/60 dark:text-white/60">
                   <span>{course.semester}</span>
                 </div>
               </div>
               
               {course.description && (
-                <div class="text-sm text-black/70 dark:text-white/70 leading-relaxed">
+                <div class="text-black/70 dark:text-white/70 text-xs leading-relaxed">
                   {course.description.startsWith('http') ? (
                     <a 
                       href={course.description} 

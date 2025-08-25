@@ -59,7 +59,7 @@ const { skillCategories } = Astro.props;
               const [subgroup, tools] = skill.includes(':') ? skill.split(':') : [skill, ''];
               return (
                 <div class="group">
-                  <div class={`${colors.bg} border ${colors.borderBox} rounded-lg px-4 py-3 text-sm transition-all duration-200 ${colors.hoverBg} ${colors.hoverBorder} leading-relaxed text-center`}>
+                  <div class={`${colors.bg} border ${colors.borderBox} rounded px-4 py-3 text-sm transition-all duration-200 ${colors.hoverBg} ${colors.hoverBorder} leading-relaxed text-center`}>
                     <div class="font-semibold text-black/90 dark:text-white/90 mb-1">
                       {subgroup.trim()}
                     </div>

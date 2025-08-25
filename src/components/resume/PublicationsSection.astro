@@ -44,7 +44,7 @@ function getCategoryColor(categoryTitle: string): string {
       <h3 class="text-lg font-semibold text-black/80 dark:text-white/80">{category.title}</h3>
       <div class="space-y-3">
         {category.publications.map((pub) => (
-          <div class={`rounded-lg border p-4 transition-colors hover:shadow-sm ${getCategoryColor(category.title)}`}>
+          <div class={`rounded border p-4 transition-colors hover:shadow-sm ${getCategoryColor(category.title)}`}>
             <p class="text-sm">
               {pub.authors} ({pub.year}). 
               "{pub.title}" 
