@@ -10,7 +10,7 @@ import TableOfContents from "@components/TableOfContents.astro";
 import Giscus from "@components/Giscus.astro";
 
 export async function getStaticPaths() {
-  const posts = (await getCollection("engineering"))
+  const posts = (await getCollection("writing"))
     .filter((post) => !post.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   return posts.map((post) => ({
@@ -18,9 +18,9 @@ export async function getStaticPaths() {
     props: post,
   }));
 }
-type Props = CollectionEntry<"engineering">;
+type Props = CollectionEntry<"writing">;
 
-const posts = (await getCollection("engineering"))
+const posts = (await getCollection("writing"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
@@ -54,7 +54,7 @@ const { Content, headings } = await render(post);
 <Layout title={post.data.title} description={post.data.description} language={post.data.language}>
   <Container>
     <div class="animate">
-      <BackToPrevious href="/engineering">Back to Engineering Articles</BackToPrevious>
+      <BackToPrevious href="/writing">Back to Engineering Articles</BackToPrevious>
     </div>
     <div class="my-10 space-y-1">
       <div class="animate flex items-center gap-1.5">

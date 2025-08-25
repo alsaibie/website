@@ -1,4 +1,4 @@
-import type { Metadata, Site, Socials } from "@types";
+import type { Metadata, Site } from "@types";
 
 export const SITE: Site = {
   TITLE: "Ali AlSaibie",
@@ -13,8 +13,8 @@ export const HOME: Metadata = {
   DESCRIPTION: "Welcome to Ali AlSaibie's personal site and blog.",
 };
 
-export const ENGINEERING: Metadata = {
-  TITLE: "Engineering",
+export const WRITING: Metadata = {
+  TITLE: "Writing",
   DESCRIPTION: "Robotics, mechatronics, and other engineering related articles",
 };
 
@@ -28,18 +28,3 @@ export const RESUME: Metadata = {
   TITLE: "Resume",
   DESCRIPTION: "Professional experience, education, and publications of Ali AlSaibie.",
 };
-
-export const SOCIALS: Socials = [
-  {
-    NAME: "X (formerly Twitter)",
-    HREF: "https://twitter.com/alialsaibie",
-  },
-  {
-    NAME: "GitHub",
-    HREF: "https://github.com/alsaibie",
-  },
-  {
-    NAME: "Website",
-    HREF: "https://ali.alsaibie.com",
-  },
-];

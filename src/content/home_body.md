@@ -1,0 +1,1 @@
+I'm an Assistant Professor at Kuwait University. This is where I share my writing, thoughts, and projects I'm working on. If you're interested in my academic background and professional experience, you can view my [resume](/resume).
