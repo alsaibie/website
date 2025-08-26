@@ -112,6 +112,38 @@ export const industryExperienceAr = [
     startYear: "فبراير 2011",
     endYear: "ديسمبر 2011",
     responsibilities: []
+  },
+  {
+    title: "مهندس ميكانيكي متخصص",
+    organization: "BP",
+    location: "الشارقة، الإمارات العربية المتحدة",
+    startYear: "سبتمبر 2008",
+    endYear: "يناير 2011", 
+    responsibilities: []
+  },
+  {
+    title: "مهندس ميكانيكي - خريج برنامج التحدي",
+    organization: "BP",
+    location: "عين أميناس، الجزائر",
+    startYear: "سبتمبر 2007",
+    endYear: "يناير 2011", 
+    responsibilities: []
+  },
+  {
+    title: "مهندس ميكانيكي - خريج برنامج التحدي",
+    organization: "BP",
+    location: "أبردين، المملكة المتحدة",
+    startYear: "نوفمبر 2006",
+    endYear: "أغسطس 2007", 
+    responsibilities: []
+  },
+  {
+    title: "مهندس ميكانيكي - خريج برنامج التحدي",
+    organization: "BP",
+    location: "الكويت",
+    startYear: "سبتمبر 2006",
+    endYear: "أكتوبر 2006", 
+    responsibilities: []
   }
 ];
 
@@ -156,11 +188,18 @@ export const coursesAr = [
     category: "أستاذ مساعد، جامعة الكويت (2019 - للآن)",
     items: [
       {
-        code: "ME 319",
-        title: "Mechatronics",
-        semester: "S19, S20, S21, S22",
+        code: "ME 554",
+        title: "Special Topics in Mechanical Design: Robotics",
+        semester: "F24",
         credits: 0,
-        description: "الميكاترونكس - https://alsaibie.github.io/me319"
+        description: "مواضيع خاصة في التصميم الميكانيكي: الروبوتات"
+      },
+      {
+        code: "ME 459",
+        title: "Engineering Design (Capstone)",
+        semester: "F21, S22, S24, S25",
+        credits: 0,
+        description: "التصميم الهندسي (مشروع التخرج)"
       },
       {
         code: "ME 417", 
@@ -170,18 +209,11 @@ export const coursesAr = [
         description: "التحكم في الأنظمة الميكانيكية - https://alsaibie.github.io/me417"
       },
       {
-        code: "ENG 203",
-        title: "Dynamics",
-        semester: "S19, F19, F20, SS21, F21, F23, SS24", 
+        code: "ME 319",
+        title: "Mechatronics",
+        semester: "S19, S20, S21, S22",
         credits: 0,
-        description: "الديناميكا"
-      },
-      {
-        code: "ME 459",
-        title: "Engineering Design (Capstone)",
-        semester: "F21, S22, S24",
-        credits: 0,
-        description: "التصميم الهندسي (مشروع التخرج)"
+        description: "الميكاترونكس - https://alsaibie.github.io/me319"
       },
       {
         code: "ENG 307",
@@ -189,6 +221,27 @@ export const coursesAr = [
         semester: "F19, F23, S24",
         credits: 0,
         description: "الطرق العددية والبرمجة للمهندسين"
+      },
+      {
+        code: "ENG 259",
+        title: "Introduction to Engineering Design",
+        semester: "S25",
+        credits: 0,
+        description: "مقدمة في التصميم الهندسي"
+      },
+      {
+        code: "ENG 203",
+        title: "Dynamics",
+        semester: "S19, F19, F20, SS21, F21, F23, SS24, SS25", 
+        credits: 0,
+        description: "الديناميكا"
+      },
+      {
+        code: "ENG 104",
+        title: "Engineering Graphics",
+        semester: "F24",
+        credits: 0,
+        description: "الرسم الهندسي"
       }
     ]
   },
