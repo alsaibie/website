@@ -21,7 +21,7 @@ const locations = [
 ];
 
 // Convert lat/lng to SVG coordinates (Robinson projection)
-function latLngToSvg(lat: number, lng: number, width = 99, height = 111) {
+function latLngToSvg(lat: number, lng: number, width = 99, height = 115) {
   // Robinson projection parallel lengths (X coefficients) and Y coefficients
   const robinsonTable = [
     { lat: 0,  x: 1.0000, y: 0.0000 },
@@ -187,9 +187,10 @@ const typeTranslations = {
             class={`map-pin ${location.type} absolute pointer-events-auto cursor-pointer transform -translate-x-1/2 -translate-y-1/2 group`}
             style={`left: ${coords.x}%; top: ${coords.y}%;`}
             data-location={`${location.city}, ${location.country}`}
+            data-pin-x={coords.x}
           >
             <!-- Pin circle -->
-            <div class={`pin-circle w-4 h-4 ${pinColor} rounded-full border-2 border-white shadow-lg transition-all duration-300 group-hover:scale-110`}>
+            <div class={`pin-circle w-4 h-4 ${pinColor} rounded-full shadow-lg transition-all duration-300 group-hover:scale-110 opacity-50`}>
             </div>
             
             <!-- Enhanced Tooltip with click details -->
@@ -202,19 +203,28 @@ const typeTranslations = {
             </div>
             
             <!-- Click details popup -->
-            <div class="click-details absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-white dark:bg-gray-800 px-4 py-3 rounded-lg shadow-xl border border-gray-200 dark:border-gray-600 opacity-0 pointer-events-none transition-all duration-200 z-20 max-w-sm w-80 hidden">
+            <div class="click-details absolute bottom-6 bg-white dark:bg-gray-800 px-4 py-3 rounded-lg shadow-xl border border-gray-200 dark:border-gray-600 opacity-0 pointer-events-none transition-all duration-200 z-20 max-w-sm w-80 hidden">
               <div class="text-sm font-semibold text-gray-900 dark:text-white mb-2" data-title></div>
               <div class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed" data-description></div>
               <button class="close-details mt-3 px-3 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 transition-colors duration-200">
                 {t.closeModal}
               </button>
-              <!-- Tooltip arrow -->
-              <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white dark:border-t-gray-800"></div>
+              <!-- Dynamic Tooltip arrow -->
+              <div class="popup-arrow absolute top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white dark:border-t-gray-800"></div>
             </div>
           </div>
         );
       })}
     </div>
+  </div>
+  
+  <!-- Mobile details block (appears below map on mobile) -->
+  <div id="mobile-details" class="mobile-details-block mt-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 p-4 transition-all duration-300 md:hidden hidden">
+    <div class="flex justify-between items-start mb-2">
+      <h3 id="mobile-title" class="text-lg font-bold text-gray-900 dark:text-white"></h3>
+      <button id="close-mobile-details" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-xl font-bold">&times;</button>
+    </div>
+    <p id="mobile-description" class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed"></p>
   </div>
 </div>
 
@@ -301,7 +311,7 @@ const typeTranslations = {
         },
         'Atlanta, United States': {
           title: 'Atlanta, Georgia',
-          description: 'Graduate studies at Georgia Institute of Technology (2012-2018). Ph.D. in Mechanical Engineering, research on autonomous underwater vehicles.'
+          description: 'Graduate studies at Georgia Institute of Technology (2012-2018). M.S. and Ph.D. in Mechanical Engineering, research on autonomous underwater vehicles.'
         },
         'Cambridge, United States': {
           title: 'Cambridge, Massachusetts',
@@ -370,31 +380,119 @@ const typeTranslations = {
       const titleElement = clickDetails?.querySelector('[data-title]');
       const descriptionElement = clickDetails?.querySelector('[data-description]');
       const closeButton = clickDetails?.querySelector('.close-details');
+      const arrow = clickDetails?.querySelector('.popup-arrow');
+      
+      // Mobile elements
+      const mobileDetails = document.getElementById('mobile-details');
+      const mobileTitle = document.getElementById('mobile-title');
+      const mobileDescription = document.getElementById('mobile-description');
+      const closeMobileButton = document.getElementById('close-mobile-details');
       
       pin.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         
-        // Hide all other open details first
-        document.querySelectorAll('.click-details').forEach(detail => {
-          detail.classList.add('hidden', 'opacity-0', 'pointer-events-none');
-        });
+        const isMobile = window.innerWidth < 768; // md breakpoint
         
-        const location = pin.getAttribute('data-location');
-        if (!location || !clickDetails || !titleElement || !descriptionElement) return;
-        
-        const localeData = experienceDetails[currentLocale];
-        const experience = localeData && localeData[location as keyof typeof localeData];
-        
-        if (experience) {
-          titleElement.textContent = experience.title;
-          descriptionElement.textContent = experience.description;
+        if (isMobile && mobileDetails && mobileTitle && mobileDescription) {
+          // Use mobile block for small screens
           
-          // Show the details popup
-          clickDetails.classList.remove('hidden');
-          setTimeout(() => {
-            clickDetails.classList.remove('opacity-0', 'pointer-events-none');
-          }, 10);
+          // Hide all desktop popups first
+          document.querySelectorAll('.click-details').forEach(detail => {
+            detail.classList.add('hidden', 'opacity-0', 'pointer-events-none');
+          });
+          
+          const location = pin.getAttribute('data-location');
+          if (!location) return;
+          
+          const localeData = experienceDetails[currentLocale];
+          const experience = localeData && localeData[location as keyof typeof localeData];
+          
+          if (experience) {
+            mobileTitle.textContent = experience.title;
+            mobileDescription.textContent = experience.description;
+            
+            // Show mobile details block
+            mobileDetails.classList.remove('hidden');
+            setTimeout(() => {
+              mobileDetails.classList.remove('opacity-0', 'transform', 'translate-y-4', 'pointer-events-none');
+            }, 10);
+            
+            // Scroll to the details block
+            setTimeout(() => {
+              mobileDetails.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 300);
+          }
+        } else {
+          // Use desktop popup for larger screens
+          
+          // Hide mobile block if visible
+          if (mobileDetails) {
+            mobileDetails.classList.add('opacity-0', 'transform', 'translate-y-4', 'pointer-events-none');
+            setTimeout(() => {
+              mobileDetails.classList.add('hidden');
+            }, 300);
+          }
+          
+          // Hide all other desktop popups first
+          document.querySelectorAll('.click-details').forEach(detail => {
+            detail.classList.add('hidden', 'opacity-0', 'pointer-events-none');
+          });
+          
+          const location = pin.getAttribute('data-location');
+          const pinX = parseFloat(pin.getAttribute('data-pin-x') || '50');
+          
+          if (!location || !clickDetails || !titleElement || !descriptionElement) return;
+          
+          const localeData = experienceDetails[currentLocale];
+          const experience = localeData && localeData[location as keyof typeof localeData];
+          
+          if (experience) {
+            titleElement.textContent = experience.title;
+            descriptionElement.textContent = experience.description;
+            
+            // Dynamic positioning for desktop
+            const mapContainer = pin.closest('.experience-world-map');
+            const mapWidth = mapContainer?.querySelector('img')?.offsetWidth || 800;
+            const popupWidth = 320; // 80 * 4 (w-80 = 20rem = 320px)
+            
+            let arrowPosition = 'left-1/2 transform -translate-x-1/2'; // centered by default
+            
+            // Reset to base classes first
+            clickDetails.className = 'click-details absolute bottom-6 bg-white dark:bg-gray-800 px-4 py-3 rounded-lg shadow-xl border border-gray-200 dark:border-gray-600 transition-all duration-200 z-20 max-w-sm w-80';
+            
+            const detailsElement = clickDetails as HTMLElement;
+            
+            if (pinX < 30) {
+              // Pin is on the left side - align popup to left
+              detailsElement.style.left = '0';
+              detailsElement.style.right = 'auto';
+              detailsElement.style.transform = 'none';
+              arrowPosition = 'left-6'; // Arrow positioned to point to pin
+            } else if (pinX > 70) {
+              // Pin is on the right side - align popup to right
+              detailsElement.style.right = '0';
+              detailsElement.style.left = 'auto';
+              detailsElement.style.transform = 'none';
+              arrowPosition = 'right-6'; // Arrow positioned to point to pin
+            } else {
+              // Pin is in the center - center the popup
+              detailsElement.style.left = '50%';
+              detailsElement.style.right = 'auto';
+              detailsElement.style.transform = 'translateX(-50%)';
+              arrowPosition = 'left-1/2 transform -translate-x-1/2';
+            }
+            
+            if (arrow) {
+              arrow.className = `popup-arrow absolute top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white dark:border-t-gray-800 ${arrowPosition}`;
+            }
+            
+            // Show the details popup
+            clickDetails.classList.remove('hidden');
+            setTimeout(() => {
+              clickDetails.classList.remove('opacity-0', 'pointer-events-none');
+            }, 10);
+          }
         }
       });
       
@@ -410,27 +508,74 @@ const typeTranslations = {
       }
     });
 
+    // Close mobile details functionality
+    const mobileDetails = document.getElementById('mobile-details');
+    const closeMobileButton = document.getElementById('close-mobile-details');
+    
+    if (closeMobileButton && mobileDetails) {
+      closeMobileButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mobileDetails.classList.add('opacity-0', 'transform', 'translate-y-4', 'pointer-events-none');
+        setTimeout(() => {
+          mobileDetails.classList.add('hidden');
+        }, 300);
+      });
+    }
+
     // Close details when clicking outside
     document.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
-      if (!target.closest('.map-pin')) {
+      if (!target.closest('.map-pin') && !target.closest('#mobile-details')) {
+        // Close desktop popups
         document.querySelectorAll('.click-details').forEach(detail => {
           detail.classList.add('opacity-0', 'pointer-events-none');
           setTimeout(() => {
             detail.classList.add('hidden');
           }, 200);
         });
+        
+        // Close mobile details
+        if (mobileDetails) {
+          mobileDetails.classList.add('opacity-0', 'transform', 'translate-y-4', 'pointer-events-none');
+        }
       }
     });
 
     // Close on escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
+        // Close desktop popups
         document.querySelectorAll('.click-details').forEach(detail => {
           detail.classList.add('opacity-0', 'pointer-events-none');
           setTimeout(() => {
             detail.classList.add('hidden');
           }, 200);
+        });
+        
+        // Close mobile details
+        if (mobileDetails) {
+          mobileDetails.classList.add('opacity-0', 'transform', 'translate-y-4', 'pointer-events-none');
+          setTimeout(() => {
+            mobileDetails.classList.add('hidden');
+          }, 300);
+        }
+      }
+    });
+
+    // Handle window resize to switch between mobile and desktop modes
+    window.addEventListener('resize', () => {
+      const isMobile = window.innerWidth < 768;
+      
+      if (!isMobile && mobileDetails) {
+        // Hide mobile details when switching to desktop
+        mobileDetails.classList.add('opacity-0', 'transform', 'translate-y-4', 'pointer-events-none');
+        setTimeout(() => {
+          mobileDetails.classList.add('hidden');
+        }, 300);
+      } else if (isMobile) {
+        // Hide desktop popups when switching to mobile
+        document.querySelectorAll('.click-details').forEach(detail => {
+          detail.classList.add('hidden', 'opacity-0', 'pointer-events-none');
         });
       }
     });

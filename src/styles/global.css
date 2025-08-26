@@ -30,6 +30,24 @@
 }
 
 @layer utilities {
+  /* Tajawal font for Arabic content */
+  [lang="ar"],
+  [dir="rtl"],
+  .arabic-text,
+  html:has([lang="ar"]) body,
+  html:has([dir="rtl"]) body {
+    font-family: 'Tajawal', 'Noto Sans Arabic', 'Cairo', ui-sans-serif, system-ui, sans-serif !important;
+  }
+  
+  /* Ensure Tajawal font for all Arabic pages and components */
+  html[lang="ar"],
+  html[lang="ar"] body,
+  html[lang="ar"] *,
+  .ar-page,
+  .ar-page * {
+    font-family: 'Tajawal', 'Noto Sans Arabic', 'Cairo', ui-sans-serif, system-ui, sans-serif !important;
+  }
+
   html {
     overflow-y: auto;
     color-scheme: light;

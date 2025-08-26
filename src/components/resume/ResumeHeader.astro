@@ -56,7 +56,17 @@ const t = getTranslation(language);
           <h1 class="text-4xl font-bold text-black dark:text-white mb-2">{avatar.name}</h1>
         )}
         {avatar.title && (
-          <h2 class="text-xl text-black/70 dark:text-white/70 mb-3">{avatar.title}</h2>
+          <h2 class="text-xl text-black/70 dark:text-white/70 mb-3">
+            <span class="hidden md:inline">{avatar.title}</span>
+            <span class="md:hidden">
+              {avatar.title.split(' | ').map((part, index, array) => (
+                <span>
+                  {part}
+                  {index < array.length - 1 && <br />}
+                </span>
+              ))}
+            </span>
+          </h2>
         )}
         <div class={`space-y-1 text-sm text-black/60 dark:text-white/60 ${language === 'ar' ? 'rtl' : ''}`}>
           {avatar.emails && (avatar.emails.personal || avatar.emails.academic) && (
