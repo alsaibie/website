@@ -1,5 +1,6 @@
 ---
 import { getTranslation } from "../../data/i18n";
+import ExperienceWorldMap from "./ExperienceWorldMap.astro";
 
 export interface Props {
   title: string;
@@ -132,6 +133,11 @@ const t = getTranslation(language);
         </div>
       </div>
     </div>
+  )}
+
+  <!-- World Map showing work locations -->
+  {avatar && (
+    <ExperienceWorldMap locale={language} />
   )}
   
   {title && (

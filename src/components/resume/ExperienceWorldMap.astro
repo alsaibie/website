@@ -1,0 +1,438 @@
+---
+import { getTranslation } from '../../data/i18n';
+
+interface Props {
+  locale?: string;
+}
+
+const { locale = 'en' } = Astro.props;
+const t = getTranslation(locale);
+
+// Location data with real coordinates
+const locations = [
+  { id: 'kuwait', city: 'Kuwait', country: 'Kuwait', lat: 29.3759, lng: 47.9774, type: 'academic' },
+  { id: 'atlanta', city: 'Atlanta', country: 'United States', lat: 33.7490, lng: -84.3880, type: 'academic' },
+  { id: 'cambridge', city: 'Cambridge', country: 'United States', lat: 42.3736, lng: -71.1097, type: 'academic' },
+  { id: 'austin', city: 'Austin', country: 'United States', lat: 30.2672, lng: -97.7431, type: 'education' },
+  { id: 'muscat', city: 'Muscat', country: 'Oman', lat: 23.5859, lng: 58.4059, type: 'industry' },
+  { id: 'sharjah', city: 'Sharjah', country: 'UAE', lat: 25.3463, lng: 55.4209, type: 'industry' },
+  { id: 'ainAmenas', city: 'Ain Amenas', country: 'Algeria', lat: 28.0524, lng: 9.6306, type: 'industry' },
+  { id: 'aberdeen', city: 'Aberdeen', country: 'United Kingdom', lat: 57.1497, lng: -2.0943, type: 'industry' }
+];
+
+// Convert lat/lng to SVG coordinates (Robinson projection)
+function latLngToSvg(lat: number, lng: number, width = 99, height = 111) {
+  // Robinson projection parallel lengths (X coefficients) and Y coefficients
+  const robinsonTable = [
+    { lat: 0,  x: 1.0000, y: 0.0000 },
+    { lat: 5,  x: 0.9986, y: 0.0620 },
+    { lat: 10, x: 0.9954, y: 0.1240 },
+    { lat: 15, x: 0.9900, y: 0.1860 },
+    { lat: 20, x: 0.9822, y: 0.2480 },
+    { lat: 25, x: 0.9730, y: 0.3100 },
+    { lat: 30, x: 0.9600, y: 0.3720 },
+    { lat: 35, x: 0.9427, y: 0.4340 },
+    { lat: 40, x: 0.9216, y: 0.4958 },
+    { lat: 45, x: 0.8962, y: 0.5571 },
+    { lat: 50, x: 0.8679, y: 0.6176 },
+    { lat: 55, x: 0.8350, y: 0.6769 },
+    { lat: 60, x: 0.7986, y: 0.7346 },
+    { lat: 65, x: 0.7597, y: 0.7903 },
+    { lat: 70, x: 0.7186, y: 0.8435 },
+    { lat: 75, x: 0.6732, y: 0.8936 },
+    { lat: 80, x: 0.6213, y: 0.9394 },
+    { lat: 85, x: 0.5722, y: 0.9761 },
+    { lat: 90, x: 0.5322, y: 1.0000 }
+  ];
+
+  // Get absolute latitude
+  const absLat = Math.abs(lat);
+  
+  // Find coefficients by interpolation
+  let x_coeff = 1.0;
+  let y_coeff = 0.0;
+  
+  for (let i = 0; i < robinsonTable.length - 1; i++) {
+    if (absLat >= robinsonTable[i].lat && absLat <= robinsonTable[i + 1].lat) {
+      const ratio = (absLat - robinsonTable[i].lat) / (robinsonTable[i + 1].lat - robinsonTable[i].lat);
+      x_coeff = robinsonTable[i].x + ratio * (robinsonTable[i + 1].x - robinsonTable[i].x);
+      y_coeff = robinsonTable[i].y + ratio * (robinsonTable[i + 1].y - robinsonTable[i].y);
+      break;
+    }
+  }
+  
+  // Handle edge case for latitude > 85
+  if (absLat > 85) {
+    x_coeff = robinsonTable[robinsonTable.length - 1].x;
+    y_coeff = robinsonTable[robinsonTable.length - 1].y;
+  }
+  
+  // Calculate Robinson coordinates
+  const robinsonX = (lng * Math.PI / 180) * x_coeff * 0.8487;
+  const robinsonY = y_coeff * (lat >= 0 ? 1 : -1) * 1.3523;
+  
+  // Convert to percentage coordinates for positioning
+  const xPercent = ((robinsonX + 2.67) / 5.34) * width;
+  const yPercent = ((1.35 - robinsonY) / 2.7) * height;
+  
+  return { x: xPercent, y: yPercent };
+}
+
+// Translations for experience details
+const experienceTranslations = {
+  en: {
+    'Kuwait, Kuwait': {
+      title: 'Kuwait, Kuwait',
+      description: 'Assistant Professor at Kuwait University (2019-Present). Teaching and research in mechanical engineering with focus on robotics and automation.'
+    },
+    'Atlanta, United States': {
+      title: 'Atlanta, Georgia',
+      description: 'Graduate studies at Georgia Institute of Technology (2012-2018). Ph.D. in Mechanical Engineering, research on autonomous underwater vehicles.'
+    },
+    'Cambridge, United States': {
+      title: 'Cambridge, Massachusetts',
+      description: 'Research affiliate at MIT Mechatronics Research Lab (2014-2018). Collaborative research on micro autonomous systems.'
+    },
+    'Austin, United States': {
+      title: 'Austin, Texas',
+      description: 'B.S. in Mechanical Engineering from University of Texas at Austin (2006). Foundation studies in engineering fundamentals.'
+    },
+    'Muscat, Oman': {
+      title: 'Muscat, Oman',
+      description: 'Discipline Mechanical Engineer at BP (2011). Worked on oil and gas facility engineering and maintenance.'
+    },
+    'Sharjah, UAE': {
+      title: 'Sharjah, UAE',
+      description: 'Discipline Mechanical Engineer at BP (2008-2011). Led mechanical engineering projects for oil and gas operations.'
+    },
+    'Ain Amenas, Algeria': {
+      title: 'Ain Amenas, Algeria',
+      description: 'Mechanical Engineer Challenge Graduate at BP (2007-2011). Part of graduate development program in oil and gas industry.'
+    },
+    'Aberdeen, United Kingdom': {
+      title: 'Aberdeen, United Kingdom',
+      description: 'Mechanical Engineer Challenge Graduate at BP (2006-2007). Started career in offshore oil and gas engineering.'
+    }
+  },
+  ar: {
+    'Kuwait, Kuwait': {
+      title: 'الكويت، الكويت',
+      description: 'أستاذ مساعد في جامعة الكويت (2019-الحاضر). التدريس والبحث في الهندسة الميكانيكية مع التركيز على الروبوتات والأتمتة.'
+    },
+    'Atlanta, United States': {
+      title: 'أتلانتا، جورجيا',
+      description: 'دراسات عليا في معهد جورجيا للتكنولوجيا (2012-2018). دكتوراه في الهندسة الميكانيكية، بحث في المركبات تحت الماء المستقلة.'
+    },
+    'Cambridge, United States': {
+      title: 'كامبريدج، ماساتشوستس',
+      description: 'باحث مشارك في مختبر الميكاترونكس بمعهد ماساتشوستس للتكنولوجيا (2014-2018). بحث تعاوني في الأنظمة المستقلة الدقيقة.'
+    },
+    'Austin, United States': {
+      title: 'أوستن، تكساس',
+      description: 'بكالوريوس في الهندسة الميكانيكية من جامعة تكساس في أوستن (2006). دراسات أساسية في أسس الهندسة.'
+    },
+    'Muscat, Oman': {
+      title: 'مسقط، عمان',
+      description: 'مهندس ميكانيكي متخصص في شركة بي بي (2011). عمل في هندسة وصيانة منشآت النفط والغاز.'
+    },
+    'Sharjah, UAE': {
+      title: 'الشارقة، الإمارات',
+      description: 'مهندس ميكانيكي متخصص في شركة بي بي (2008-2011). قاد مشاريع الهندسة الميكانيكية لعمليات النفط والغاز.'
+    },
+    'Ain Amenas, Algeria': {
+      title: 'عين أمناس، الجزائر',
+      description: 'مهندس ميكانيكي خريج برنامج التحدي في شركة بي بي (2007-2011). جزء من برنامج تطوير الخريجين في صناعة النفط والغاز.'
+    },
+    'Aberdeen, United Kingdom': {
+      title: 'أبردين، المملكة المتحدة',
+      description: 'مهندس ميكانيكي خريج برنامج التحدي في شركة بي بي (2006-2007). بداية المسيرة المهنية في هندسة النفط والغاز البحرية.'
+    }
+  }
+};
+
+const typeTranslations = {
+  academic: t.academic,
+  education: t.education,
+  industry: t.industry
+};
+---
+
+<div class="experience-world-map my-6">
+  <div class="relative inline-block w-full">
+    <!-- World map SVG -->
+    <img 
+      src="/world.svg" 
+      alt="World Map" 
+      class="w-full h-auto rounded-lg shadow-lg border border-gray-200 dark:border-gray-700"
+      style="max-height: 400px; object-fit: contain;"
+    />
+    
+    <!-- Overlay container for pins -->
+    <div class="absolute inset-0 pointer-events-none">
+      {locations.map((location) => {
+        const coords = latLngToSvg(location.lat, location.lng);
+        const isAcademic = location.type === 'academic';
+        const isEducation = location.type === 'education';
+        const isIndustry = location.type === 'industry';
+        
+        let pinColor = 'bg-gray-500 hover:bg-gray-600';
+        if (isAcademic) pinColor = 'bg-blue-500 hover:bg-blue-600';
+        if (isEducation) pinColor = 'bg-purple-500 hover:bg-purple-600';
+        if (isIndustry) pinColor = 'bg-green-500 hover:bg-green-600';
+        
+        const typeLabel = typeTranslations[location.type as keyof typeof typeTranslations] || location.type;
+        
+        return (
+          <div 
+            class={`map-pin ${location.type} absolute pointer-events-auto cursor-pointer transform -translate-x-1/2 -translate-y-1/2 group`}
+            style={`left: ${coords.x}%; top: ${coords.y}%;`}
+            data-location={`${location.city}, ${location.country}`}
+          >
+            <!-- Pin circle -->
+            <div class={`pin-circle w-4 h-4 ${pinColor} rounded-full border-2 border-white shadow-lg transition-all duration-300 group-hover:scale-110`}>
+            </div>
+            
+            <!-- Enhanced Tooltip with click details -->
+            <div class="pin-tooltip absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-white dark:bg-gray-800 px-3 py-2 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10 max-w-xs">
+              <div class="text-sm font-semibold text-gray-900 dark:text-white">{location.city}, {location.country}</div>
+              <div class="text-xs text-gray-600 dark:text-gray-300">{typeLabel}</div>
+              <div class="text-xs text-blue-600 dark:text-blue-400 mt-1">Click for details</div>
+              <!-- Tooltip arrow -->
+              <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white dark:border-t-gray-800"></div>
+            </div>
+            
+            <!-- Click details popup -->
+            <div class="click-details absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-white dark:bg-gray-800 px-4 py-3 rounded-lg shadow-xl border border-gray-200 dark:border-gray-600 opacity-0 pointer-events-none transition-all duration-200 z-20 max-w-sm w-80 hidden">
+              <div class="text-sm font-semibold text-gray-900 dark:text-white mb-2" data-title></div>
+              <div class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed" data-description></div>
+              <button class="close-details mt-3 px-3 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 transition-colors duration-200">
+                {t.closeModal}
+              </button>
+              <!-- Tooltip arrow -->
+              <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white dark:border-t-gray-800"></div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</div>
+
+<style>
+  .pin-circle {
+    animation: pulse 2s infinite;
+    animation-delay: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+    animation-duration: 2.5s;
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 0 rgba(59, 130, 246, 0.7);
+    }
+    70% {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 10px rgba(59, 130, 246, 0);
+    }
+    100% {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 0 rgba(59, 130, 246, 0);
+    }
+  }
+
+  .industry .pin-circle {
+    animation-name: pulse-green;
+  }
+
+  @keyframes pulse-green {
+    0% {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    70% {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 10px rgba(34, 197, 94, 0);
+    }
+    100% {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+  }
+
+  .education .pin-circle {
+    animation-name: pulse-purple;
+  }
+
+  @keyframes pulse-purple {
+    0% {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 0 rgba(147, 51, 234, 0.7);
+    }
+    70% {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 10px rgba(147, 51, 234, 0);
+    }
+    100% {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 0 rgba(147, 51, 234, 0);
+    }
+  }
+
+  /* Dark mode adjustments */
+  .dark .pin-tooltip {
+    background: rgba(255,255,255,0.95);
+    color: #1f2937;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+  
+  .dark .pin-tooltip .text-gray-900 {
+    color: #1f2937 !important;
+  }
+  
+  .dark .pin-tooltip .text-gray-600 {
+    color: #4b5563 !important;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get current locale from URL or default to 'en'
+    const currentLocale = window.location.pathname.startsWith('/ar') ? 'ar' : 'en';
+    
+    // Experience details translations
+    const experienceDetails = {
+      en: {
+        'Kuwait, Kuwait': {
+          title: 'Kuwait, Kuwait',
+          description: 'Assistant Professor at Kuwait University (2019-Present). Teaching and research in mechanical engineering with focus on robotics and automation.'
+        },
+        'Atlanta, United States': {
+          title: 'Atlanta, Georgia',
+          description: 'Graduate studies at Georgia Institute of Technology (2012-2018). Ph.D. in Mechanical Engineering, research on autonomous underwater vehicles.'
+        },
+        'Cambridge, United States': {
+          title: 'Cambridge, Massachusetts',
+          description: 'Research affiliate at MIT Mechatronics Research Lab (2014-2018). Collaborative research on micro autonomous systems.'
+        },
+        'Austin, United States': {
+          title: 'Austin, Texas',
+          description: 'B.S. in Mechanical Engineering from University of Texas at Austin (2006). Foundation studies in engineering fundamentals.'
+        },
+        'Muscat, Oman': {
+          title: 'Muscat, Oman',
+          description: 'Discipline Mechanical Engineer at BP (2011). Worked on oil and gas facility engineering and maintenance.'
+        },
+        'Sharjah, UAE': {
+          title: 'Sharjah, UAE',
+          description: 'Discipline Mechanical Engineer at BP (2008-2011). Led mechanical engineering projects for oil and gas operations.'
+        },
+        'Ain Amenas, Algeria': {
+          title: 'Ain Amenas, Algeria',
+          description: 'Mechanical Engineer Challenge Graduate at BP (2007-2011). Part of graduate development program in oil and gas industry.'
+        },
+        'Aberdeen, United Kingdom': {
+          title: 'Aberdeen, United Kingdom',
+          description: 'Mechanical Engineer Challenge Graduate at BP (2006-2007). Started career in offshore oil and gas engineering.'
+        }
+      },
+      ar: {
+        'Kuwait, Kuwait': {
+          title: 'الكويت، الكويت',
+          description: 'أستاذ مساعد في جامعة الكويت (2019-الحاضر). التدريس والبحث في الهندسة الميكانيكية مع التركيز على الروبوتات والأتمتة.'
+        },
+        'Atlanta, United States': {
+          title: 'أتلانتا، جورجيا',
+          description: 'دراسات عليا في معهد جورجيا للتكنولوجيا (2012-2018). دكتوراه في الهندسة الميكانيكية، بحث في المركبات تحت الماء المستقلة.'
+        },
+        'Cambridge, United States': {
+          title: 'كامبريدج، ماساتشوستس',
+          description: 'باحث مشارك في مختبر الميكاترونكس بمعهد ماساتشوستس للتكنولوجيا (2014-2018). بحث تعاوني في الأنظمة المستقلة الدقيقة.'
+        },
+        'Austin, United States': {
+          title: 'أوستن، تكساس',
+          description: 'بكالوريوس في الهندسة الميكانيكية من جامعة تكساس في أوستن (2006). دراسات أساسية في أسس الهندسة.'
+        },
+        'Muscat, Oman': {
+          title: 'مسقط، عمان',
+          description: 'مهندس ميكانيكي متخصص في شركة بي بي (2011). عمل في هندسة وصيانة منشآت النفط والغاز.'
+        },
+        'Sharjah, UAE': {
+          title: 'الشارقة، الإمارات',
+          description: 'مهندس ميكانيكي متخصص في شركة بي بي (2008-2011). قاد مشاريع الهندسة الميكانيكية لعمليات النفط والغاز.'
+        },
+        'Ain Amenas, Algeria': {
+          title: 'عين أمناس، الجزائر',
+          description: 'مهندس ميكانيكي خريج برنامج التحدي في شركة بي بي (2007-2011). جزء من برنامج تطوير الخريجين في صناعة النفط والغاز.'
+        },
+        'Aberdeen, United Kingdom': {
+          title: 'أبردين، المملكة المتحدة',
+          description: 'مهندس ميكانيكي خريج برنامج التحدي في شركة بي بي (2006-2007). بداية المسيرة المهنية في هندسة النفط والغاز البحرية.'
+        }
+      }
+    };
+
+    // Add click listeners to pins
+    document.querySelectorAll('.map-pin').forEach(pin => {
+      const clickDetails = pin.querySelector('.click-details');
+      const titleElement = clickDetails?.querySelector('[data-title]');
+      const descriptionElement = clickDetails?.querySelector('[data-description]');
+      const closeButton = clickDetails?.querySelector('.close-details');
+      
+      pin.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Hide all other open details first
+        document.querySelectorAll('.click-details').forEach(detail => {
+          detail.classList.add('hidden', 'opacity-0', 'pointer-events-none');
+        });
+        
+        const location = pin.getAttribute('data-location');
+        if (!location || !clickDetails || !titleElement || !descriptionElement) return;
+        
+        const localeData = experienceDetails[currentLocale];
+        const experience = localeData && localeData[location as keyof typeof localeData];
+        
+        if (experience) {
+          titleElement.textContent = experience.title;
+          descriptionElement.textContent = experience.description;
+          
+          // Show the details popup
+          clickDetails.classList.remove('hidden');
+          setTimeout(() => {
+            clickDetails.classList.remove('opacity-0', 'pointer-events-none');
+          }, 10);
+        }
+      });
+      
+      // Close button functionality
+      if (closeButton && clickDetails) {
+        closeButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          clickDetails.classList.add('opacity-0', 'pointer-events-none');
+          setTimeout(() => {
+            clickDetails.classList.add('hidden');
+          }, 200);
+        });
+      }
+    });
+
+    // Close details when clicking outside
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.map-pin')) {
+        document.querySelectorAll('.click-details').forEach(detail => {
+          detail.classList.add('opacity-0', 'pointer-events-none');
+          setTimeout(() => {
+            detail.classList.add('hidden');
+          }, 200);
+        });
+      }
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.click-details').forEach(detail => {
+          detail.classList.add('opacity-0', 'pointer-events-none');
+          setTimeout(() => {
+            detail.classList.add('hidden');
+          }, 200);
+        });
+      }
+    });
+  });
+</script>

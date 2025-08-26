@@ -25,7 +25,7 @@ export interface Translation {
   backToTop: string;
   search: string;
   
-  // Resume
+  // Resume  
   education: string;
   publications: string;
   skills: string;
@@ -34,7 +34,10 @@ export interface Translation {
   saveCVPDF: string;
   present: string;
   
-  // Meta
+  // Experience Map
+  academic: string;
+  industry: string;
+  closeModal: string;  // Meta
   homeDescription: string;
   writingDescription: string;
   projectsDescription: string;
@@ -78,6 +81,11 @@ export const translations: Record<string, Translation> = {
     saveCVPDF: "Save CV PDF",
     present: "Present",
     
+    // Experience Map
+    academic: "Academic",
+    industry: "Industry",
+    closeModal: "Close",
+    
     // Meta
     homeDescription: "Welcome to Ali AlSaibie's personal site and blog.",
     writingDescription: "Robotics, mechatronics, and other engineering related articles",
@@ -120,6 +128,11 @@ export const translations: Record<string, Translation> = {
     advisor: "المشرف",
     saveCVPDF: "تحميل السيرة الذاتية",
     present: "مستمر",
+    
+    // Experience Map
+    academic: "أكاديمي",
+    industry: "صناعة",
+    closeModal: "إغلاق",
     
     // Meta
     homeDescription: "مرحباً بكم في الموقع الشخصي والمدونة الخاصة بعلي الصيبي.",
