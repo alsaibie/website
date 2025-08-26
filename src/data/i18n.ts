@@ -118,7 +118,7 @@ export const translations: Record<string, Translation> = {
     academicEmail: "البريد الأكاديمي:",
     readMore: "اقرأ المزيد",
     backToTop: "العودة للأعلى",
-    search: "بحث",
+    search: "ابحث",
     
     // Resume
     education: "التعليم",
@@ -130,8 +130,8 @@ export const translations: Record<string, Translation> = {
     present: "مستمر",
     
     // Experience Map
-    academic: "أكاديمي",
-    industry: "صناعة",
+    academic: "قطاع أكاديمي",
+    industry: "قطاع مهني",
     closeModal: "إغلاق",
     
     // Meta
