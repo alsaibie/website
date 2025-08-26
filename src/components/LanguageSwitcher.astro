@@ -8,26 +8,19 @@ const currentPath = Astro.url.pathname;
 const basePath = currentPath.replace(/^\/(ar|en)/, '') || '/';
 
 const otherLanguage = currentLocale === "en" ? "ar" : "en";
-const otherLanguageName = currentLocale === "en" ? "العربية" : "English";
+const otherLanguageCode = currentLocale === "en" ? "Ar" : "En";
 const switchUrl = getRelativeLocaleUrl(otherLanguage, basePath);
 ---
 
 <div class="language-switcher">
   <button 
     id="language-toggle"
-    class="language-button"
-    aria-label={`Switch to ${otherLanguageName}`}
-    title={`Switch to ${otherLanguageName}`}
+    class="flex items-center rounded-sm border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"
+    aria-label={`Switch to ${otherLanguage === "ar" ? "Arabic" : "English"}`}
+    title={`Switch to ${otherLanguage === "ar" ? "Arabic" : "English"}`}
     data-url={switchUrl}
   >
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
-      <path d="M12 2C13.5 4 15.5 7.5 16 12C15.5 16.5 13.5 20 12 22" stroke="currentColor" stroke-width="1.5"/>
-      <path d="M12 2C10.5 4 8.5 7.5 8 12C8.5 16.5 10.5 20 12 22" stroke="currentColor" stroke-width="1.5"/>
-      <path d="M2 12h20" stroke="currentColor" stroke-width="1.5"/>
-      <path d="M4.93 7h14.14" stroke="currentColor" stroke-width="1.5"/>
-      <path d="M4.93 17h14.14" stroke="currentColor" stroke-width="1.5"/>
-    </svg>
+    {otherLanguageCode}
   </button>
 </div>
 
@@ -45,50 +38,3 @@ const switchUrl = getRelativeLocaleUrl(otherLanguage, basePath);
     }
   });
 </script>
-
-<style>
-  .language-switcher {
-    display: flex;
-    align-items: center;
-  }
-  
-  .language-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    border: none;
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
-    border-radius: 0.375rem;
-    transition: all 0.2s ease;
-  }
-  
-  .language-button:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    transform: scale(1.05);
-  }
-  
-  .dark .language-button:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-  }
-  
-  .language-button:focus {
-    outline: none;
-    ring: 2px;
-    ring-color: rgba(0, 0, 0, 0.2);
-  }
-  
-  .dark .language-button:focus {
-    ring-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  .language-button svg {
-    transition: transform 0.2s ease;
-  }
-  
-  .language-button:hover svg {
-    transform: rotate(15deg);
-  }
-</style>
