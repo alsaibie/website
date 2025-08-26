@@ -1,0 +1,62 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const currentLocale = Astro.currentLocale || "en";
+const currentPath = Astro.url.pathname;
+
+// Remove locale prefix from path to get the base path
+const basePath = currentPath.replace(/^\/(ar|en)/, '') || '/';
+
+const languages = [
+  { code: "en", name: "English", nativeName: "English" },
+  { code: "ar", name: "Arabic", nativeName: "العربية" }
+];
+---
+
+<div class="language-switcher">
+  <select 
+    id="language-select"
+    class="bg-transparent text-sm border border-black/20 dark:border-white/20 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20"
+    aria-label="Select language"
+  >
+    {languages.map((lang) => (
+      <option 
+        value={lang.code} 
+        selected={currentLocale === lang.code}
+        data-url={getRelativeLocaleUrl(lang.code, basePath)}
+      >
+        {lang.nativeName}
+      </option>
+    ))}
+  </select>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const select = document.getElementById('language-select') as HTMLSelectElement;
+    if (select) {
+      select.addEventListener('change', function(e) {
+        const target = e.target as HTMLSelectElement;
+        const selectedOption = target.selectedOptions[0];
+        const url = selectedOption.getAttribute('data-url');
+        if (url) {
+          window.location.href = url;
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .language-switcher select {
+    cursor: pointer;
+  }
+  
+  .language-switcher select:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .dark .language-switcher select:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+</style>

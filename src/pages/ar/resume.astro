@@ -1,0 +1,42 @@
+---
+import { getTranslation } from "../../data/i18n";
+import Layout from "../../layouts/Layout.astro";
+import Container from "../../components/Container.astro";
+import ResumeHeader from "../../components/resume/ResumeHeader.astro";
+import EducationSection from "../../components/resume/EducationSection.astro";
+import AcademicExperienceSection from "../../components/resume/AcademicExperienceSection.astro";
+import LinkedInExperienceSection from "../../components/resume/LinkedInExperienceSection.astro";
+import PublicationsSection from "../../components/resume/PublicationsSection.astro";
+import CoursesSection from "../../components/resume/CoursesSection.astro";
+import SkillsSection from "../../components/resume/SkillsSection.astro";
+
+import { 
+  avatarDataAr, 
+  educationAr, 
+  academicExperienceAr, 
+  industryExperienceAr, 
+  publicationsAr, 
+  coursesAr, 
+  skillCategoriesAr 
+} from "../../data/resumeDataAr";
+
+const lang = "ar";
+const t = getTranslation(lang);
+---
+
+<Layout title={t.resume} description={t.resumeDescription} language={lang}>
+  <Container>
+    <div class="animate">
+      <ResumeHeader title="" avatar={avatarDataAr} language={lang} />
+      
+      <div class="space-y-8">
+        <EducationSection education={educationAr} language={lang} />
+        <AcademicExperienceSection title="التجربة الأكاديمية" experiences={academicExperienceAr} language={lang} />
+        <LinkedInExperienceSection title="التجربة المهنية" experiences={industryExperienceAr} language={lang} />
+        <PublicationsSection categories={publicationsAr} language={lang} />
+        <CoursesSection courses={coursesAr} language={lang} />
+        <SkillsSection skillCategories={skillCategoriesAr} language={lang} />
+      </div>
+    </div>
+  </Container>
+</Layout>

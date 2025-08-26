@@ -11,9 +11,10 @@ export interface EducationItem {
 
 export interface Props {
   education: EducationItem[];
+  language?: string;
 }
 
-const { education } = Astro.props;
+const { education, language = "en" } = Astro.props;
 ---
 
 <section class="animate space-y-4">
@@ -22,8 +23,10 @@ const { education } = Astro.props;
   </h2>
   <div class="space-y-6">
     {education.map((item) => (
-      <div class="border-l-4 border-black/20 dark:border-white/30 pl-4">
-        <h3 class="text-lg font-semibold">{item.degree} in {item.field}</h3>
+      <div class={language === 'ar' ? "border-r-4 border-black/20 dark:border-white/30 pr-4" : "border-l-4 border-black/20 dark:border-white/30 pl-4"}>
+        <h3 class="text-lg font-semibold">
+          {language === 'ar' ? `${item.degree} في ${item.field}` : `${item.degree} in ${item.field}`}
+        </h3>
         <p class="text-black/70 dark:text-white/70">{item.institution} • {item.year}</p>
         {item.details && <p class="mt-2 text-sm">{item.details}</p>}
         {item.advisor && <p class="text-sm text-black/60 dark:text-white/60">Advisor: {item.advisor}</p>}

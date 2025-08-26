@@ -1,0 +1,131 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Container from "../../components/Container.astro";
+import { SITE } from "../../consts";
+import { getTranslation } from "../../data/i18n";
+import { SOCIALS } from "../../data/socialsData";
+import ArrowCard from "../../components/ArrowCard.astro";
+import Link from "../../components/Link.astro";
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import type { CollectionEntry } from "astro:content";
+
+const currentLocale = "ar";
+const t = getTranslation(currentLocale);
+
+// Import the Arabic markdown content
+const homeBodyContent = await Astro.glob('../../content/home_body_ar.md');
+const HomeBody = homeBodyContent[0].Content;
+
+const writing = (await getCollection("writing"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+
+const projects: CollectionEntry<"projects">[] = (
+  await getCollection("projects")
+)
+  .filter((project) => !project.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
+---
+
+<Layout title={SITE.TITLE} description={t.homeDescription}>
+  <Container>
+    <aside data-pagefind-ignore dir="rtl">
+      <h1 class="font-semibold text-black dark:text-white">
+        {t.welcomeHeading}
+      </h1>
+      <div class="space-y-16">
+        <section>
+          <article class="space-y-4">
+            <div class="prose prose-neutral dark:prose-invert max-w-none">
+              <HomeBody />
+            </div>
+          </article>
+        </section>
+
+        <section class="animate space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-y-2">
+            <h2 class="font-semibold text-black dark:text-white">
+              {t.latestPosts}
+            </h2>
+            <Link href={getRelativeLocaleUrl(currentLocale, "/writing")}>{t.seeAllPosts}</Link>
+          </div>
+          <ul class="not-prose flex flex-col gap-4">
+            {
+              writing.map((post) => (
+                <li>
+                  <ArrowCard entry={post} />
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <section class="animate space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-y-2">
+            <h2 class="font-semibold text-black dark:text-white">
+              {t.recentProjects}
+            </h2>
+            <Link href={getRelativeLocaleUrl(currentLocale, "/projects")}>{t.seeAllProjects}</Link>
+          </div>
+          <ul class="not-prose flex flex-col gap-4">
+            {
+              projects.map((project) => (
+                <li>
+                  <ArrowCard entry={project} />
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <section class="animate space-y-4">
+          <h2 class="font-semibold text-black dark:text-white">
+            {t.getInTouch}
+          </h2>
+          <article>
+            <p>
+              {t.getInTouchDesc}
+            </p>
+          </article>
+          <ul class="not-prose flex flex-wrap gap-4">
+            {
+              SOCIALS.map((SOCIAL) => (
+                <li>
+                  <div class="flex items-center justify-center p-2 rounded border border-black/10 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                    <Link
+                      href={SOCIAL.HREF}
+                      external
+                      underline={false}
+                      aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
+                    >
+                      <Fragment set:html={SOCIAL.ICON} />
+                      <span class="sr-only">{SOCIAL.NAME}</span>
+                    </Link>
+                  </div>
+                </li>
+              ))
+            }
+            <li>
+              <div class="flex items-center justify-center p-2 rounded border border-black/10 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                <Link
+                  href={`mailto:${SITE.EMAIL}`}
+                  underline={false}
+                  aria-label={`Email ${SITE.TITLE}`}
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                  </svg>
+                  <span class="sr-only">{t.email}</span>
+                </Link>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </aside>
+  </Container>
+</Layout>

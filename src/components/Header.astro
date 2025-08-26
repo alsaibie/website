@@ -1,27 +1,37 @@
 ---
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
+import LanguageSwitcher from "@components/LanguageSwitcher.astro";
+import { getTranslation } from "@data/i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { SITE } from "@consts";
+
+const currentLocale = Astro.currentLocale || "en";
+const t = getTranslation(currentLocale);
 ---
 
 <header transition:persist>
   <Container>
     <div class="flex flex-wrap justify-between gap-y-2">
-      <Link href="/" underline={false}>
+      <Link href={getRelativeLocaleUrl(currentLocale, "/")} underline={false}>
         <div class="font-semibold">
           {SITE.TITLE}
         </div>
       </Link>
       <nav class="flex items-center gap-1 text-sm">
-        <Link href="/writing">writing</Link>
+        <Link href={getRelativeLocaleUrl(currentLocale, "/writing")}>{t.writing}</Link>
         <span>
           {`/`}
         </span>
-        <Link href="/projects">projects</Link>
+        <Link href={getRelativeLocaleUrl(currentLocale, "/projects")}>{t.projects}</Link>
         <span>
           {`/`}
         </span>
-        <Link href="/resume">resume</Link>
+        <Link href={getRelativeLocaleUrl(currentLocale, "/resume")}>{t.resume}</Link>
+        <span>
+          {` `}
+        </span>
+        <LanguageSwitcher />
         <span>
           {` `}
         </span>

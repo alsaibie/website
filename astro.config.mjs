@@ -7,6 +7,13 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
   site: "https://ali.alsaibie.com",
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "ar"],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  },
   integrations: [sitemap(), mdx(), pagefind()],
   vite: {
     plugins: [tailwindcss()],

@@ -25,7 +25,7 @@ import {
 <Layout title={RESUME.TITLE} description={RESUME.DESCRIPTION}>
   <Container>
     <div class="animate">
-      <ResumeHeader title="" avatar={avatarData} />
+      <ResumeHeader title="" avatar={avatarData} language="en" />
       
       <div class="space-y-8">
         <EducationSection education={education} />
@@ -42,11 +42,11 @@ import {
           borderColor="green-500/50" 
         />
         
-        <PublicationsSection categories={publications} />
+        <PublicationsSection categories={publications} language="en" />
         
-        <CoursesSection courses={courses} />
+        <CoursesSection courses={courses} language="en" />
         
-        <SkillsSection skillCategories={skillCategories} />
+        <SkillsSection skillCategories={skillCategories} language="en" />
         
         <!-- <AwardsSection awards={awards} /> -->
       </div>

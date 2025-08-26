@@ -21,9 +21,10 @@ export interface Props {
   title: string;
   experiences: ExperienceItem[];
   borderColor?: string;
+  language?: string;
 }
 
-const { title, experiences, borderColor = "blue-500/50" } = Astro.props;
+const { title, experiences, borderColor = "blue-500/50", language = "en" } = Astro.props;
 
 // Helper function to get numeric year for sorting
 function getNumericYear(yearStr: string): number {
@@ -73,7 +74,7 @@ sortedOrganizations.forEach(org => {
   </h2>
   <div class="space-y-8">
     {sortedOrganizations.map((org) => (
-      <div class={`border-l-4 border-${borderColor} pl-4`}>
+      <div class={language === 'ar' ? `border-r-4 border-${borderColor} pr-4` : `border-l-4 border-${borderColor} pl-4`}>
         <!-- Organization Header with Location -->
         <div class="mb-4">
           <h3 class="text-xl font-semibold text-black dark:text-white">{org.organization}</h3>
@@ -83,10 +84,10 @@ sortedOrganizations.forEach(org => {
         </div>
         
         <!-- Positions within organization -->
-        <div class="space-y-4 ml-4">
+        <div class={language === 'ar' ? "space-y-4 mr-4" : "space-y-4 ml-4"}>
           {org.positions.map((position, index) => (
-            <div class="border-l-2 border-black/10 dark:border-white/20 pl-4">
-              <div class="flex flex-wrap items-start justify-between gap-2">
+            <div class={language === 'ar' ? "border-r-2 border-black/10 dark:border-white/20 pr-4" : "border-l-2 border-black/10 dark:border-white/20 pl-4"}>
+              <div class={`flex flex-wrap items-start gap-2 ${language === 'ar' ? 'justify-between flex-row-reverse' : 'justify-between'}`}>
                 <div class="flex-1">
                   <h4 class="text-lg font-medium text-black dark:text-white">{position.title}</h4>
                   {position.department && (
