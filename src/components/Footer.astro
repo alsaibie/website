@@ -2,6 +2,11 @@
 import Container from "@components/Container.astro";
 import { SITE } from "@consts";
 import BackToTop from "@components/BackToTop.astro";
+import { getTranslation } from "@data/i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const currentLocale = Astro.currentLocale || "en";
+const t = getTranslation(currentLocale);
 ---
 
 <footer class="animate">
@@ -12,7 +17,7 @@ import BackToTop from "@components/BackToTop.astro";
       </div>
     </div>
     <div class="flex items-center justify-between">
-      <div>&copy; {new Date().getFullYear()} • {SITE.TITLE} </div>
+      <div>&copy; {new Date().getFullYear()} • {t.siteTitle} </div>
       <div class="flex flex-wrap items-center gap-1.5">
         <button
           id="light-theme-button"

@@ -30,7 +30,7 @@ const projects: CollectionEntry<"projects">[] = (
   .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
 ---
 
-<Layout title={SITE.TITLE} description={t.homeDescription}>
+<Layout title={t.siteTitle} description={t.homeDescription}>
   <Container>
     <aside data-pagefind-ignore dir="rtl">
       <h1 class="font-semibold text-black dark:text-white">
@@ -99,7 +99,7 @@ const projects: CollectionEntry<"projects">[] = (
                       href={SOCIAL.HREF}
                       external
                       underline={false}
-                      aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
+                      aria-label={`${t.siteTitle} on ${SOCIAL.NAME}`}
                     >
                       <Fragment set:html={SOCIAL.ICON} />
                       <span class="sr-only">{SOCIAL.NAME}</span>
@@ -113,7 +113,7 @@ const projects: CollectionEntry<"projects">[] = (
                 <Link
                   href={`mailto:${SITE.EMAIL}`}
                   underline={false}
-                  aria-label={`Email ${SITE.TITLE}`}
+                  aria-label={`Email ${t.siteTitle}`}
                 >
                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>

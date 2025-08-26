@@ -4,6 +4,7 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Pagefind from "@components/PageFind.astro";
 import { SITE } from "@consts";
+import { getTranslation } from "@data/i18n";
 
 type Props = {
   title: string;
@@ -13,12 +14,14 @@ type Props = {
 
 const { title, description, language = 'en' } = Astro.props;
 const isRtl = language === 'ar';
+const currentLocale = Astro.currentLocale || language;
+const t = getTranslation(currentLocale);
 ---
 
 <!doctype html>
 <html lang={language} dir={isRtl ? 'rtl' : 'ltr'} class={isRtl ? 'rtl' : ''}>
   <head>
-    <Head title={`${title} | ${SITE.TITLE}`} description={description} />
+    <Head title={`${title} | ${t.siteTitle}`} description={description} />
   </head>
   <body>
     <noscript>

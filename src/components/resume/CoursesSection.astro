@@ -1,4 +1,6 @@
 ---
+import { getTranslation } from "../../data/i18n";
+
 export interface Course {
   code: string;
   title: string;
@@ -18,11 +20,12 @@ export interface Props {
 }
 
 const { courses, language = "en" } = Astro.props;
+const t = getTranslation(language);
 ---
 
 <section class="space-y-6" dir="ltr">
   <h2 class="text-2xl font-semibold text-black dark:text-white border-b border-black/10 dark:border-white/25 pb-2">
-    Teaching Experience
+    {t.teachingExperience}
   </h2>
   
   <div class="space-y-8">
@@ -48,15 +51,23 @@ const { courses, language = "en" } = Astro.props;
               
               {course.description && (
                 <div class={`text-black/70 dark:text-white/70 text-xs leading-relaxed ${language === 'ar' ? 'text-right' : 'text-left'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
-                  {course.description.startsWith('http') ? (
-                    <a 
-                      href={course.description} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      class="text-blue-600 dark:text-blue-400 hover:underline"
-                    >
-                      {course.description}
-                    </a>
+                  {course.description.includes('http') ? (
+                    <span>
+                      {course.description.split(/(https?:\/\/[^\s]+)/g).map((part, index) => 
+                        part.match(/^https?:\/\//) ? (
+                          <a 
+                            href={part} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            class="text-blue-600 dark:text-blue-400 hover:underline"
+                          >
+                            {part}
+                          </a>
+                        ) : (
+                          <span>{part}</span>
+                        )
+                      )}
+                    </span>
                   ) : (
                     <span>{course.description}</span>
                   )}

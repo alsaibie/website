@@ -7,6 +7,10 @@ import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import { getTranslation } from "@data/i18n";
+
+const currentLocale = Astro.currentLocale || "en";
+const t = getTranslation(currentLocale);
 
 // Import the markdown content
 const homeBodyContent = await Astro.glob('../content/home_body.md');

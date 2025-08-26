@@ -1,4 +1,7 @@
 export interface Translation {
+  // Site
+  siteTitle: string;
+  
   // Navigation
   home: string;
   writing: string;
@@ -20,10 +23,15 @@ export interface Translation {
   academicEmail: string;
   readMore: string;
   backToTop: string;
+  search: string;
   
   // Resume
+  education: string;
+  publications: string;
+  skills: string;
   teachingExperience: string;
   saveCVPDF: string;
+  present: string;
   
   // Meta
   homeDescription: string;
@@ -34,6 +42,9 @@ export interface Translation {
 
 export const translations: Record<string, Translation> = {
   en: {
+    // Site
+    siteTitle: "Ali AlSaibie",
+    
     // Navigation
     home: "Home",
     writing: "Writing", 
@@ -55,10 +66,15 @@ export const translations: Record<string, Translation> = {
     academicEmail: "Academic:",
     readMore: "Read more",
     backToTop: "Back to top",
+    search: "Search",
     
     // Resume  
+    education: "Education",
+    publications: "Publications",
+    skills: "Skills",
     teachingExperience: "Teaching Experience",
     saveCVPDF: "Save CV PDF",
+    present: "Present",
     
     // Meta
     homeDescription: "Welcome to Ali AlSaibie's personal site and blog.",
@@ -68,6 +84,9 @@ export const translations: Record<string, Translation> = {
   },
   
   ar: {
+    // Site
+    siteTitle: "علي الصيبعي",
+    
     // Navigation
     home: "الرئيسية",
     writing: "المقالات",
@@ -85,14 +104,19 @@ export const translations: Record<string, Translation> = {
     
     // Common
     email: "البريد الإلكتروني",
-    personalEmail: "شخصي:",
-    academicEmail: "أكاديمي:",
+    personalEmail: "البريد الشخصي:",
+    academicEmail: "البريد الأكاديمي:",
     readMore: "اقرأ المزيد",
     backToTop: "العودة للأعلى",
+    search: "بحث",
     
     // Resume
+    education: "التعليم",
+    publications: "المنشورات البحثية",
+    skills: "المهارات",
     teachingExperience: "الخبرة التدريسية", 
     saveCVPDF: "تحميل السيرة الذاتية",
+    present: "مستمر",
     
     // Meta
     homeDescription: "مرحباً بكم في الموقع الشخصي والمدونة الخاصة بعلي الصيبي.",

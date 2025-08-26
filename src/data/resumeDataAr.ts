@@ -2,7 +2,7 @@
 export const avatarDataAr = {
   src: "/avatar.jpg",
   alt: "علي الصيبعي",
-  name: "علي الصيبعي",
+  name: "د. علي الصيبعي",
   title: "أستاذ مساعد | جامعة الكويت",
   emails: {
     personal: "ali@alsaibie.com",
@@ -48,11 +48,38 @@ export const academicExperienceAr = [
     current: true,
     responsibilities: []
   },
+   {
+    title: "باحث زائر",
+    organization: "معهد جورجيا للتكنولوجيا",
+    department: "الهندسة الميكانيكية",
+    location: "أتلانتا، جورجيا",
+    startYear: "مايو 2023",
+    endYear: "أغسطس 2023",
+    responsibilities: []
+  },
   {
-    title: "زميل باحث",
-    organization: "معهد ماساتشوستس للتكنولوجيا (MIT)",
-    department: "مختبر أبحاث الميكاترونكس",
-    location: "كامبريدج، ماساتشوستس",
+    title: "مساعد مدرس",
+    organization: "معهد جورجيا للتكنولوجيا",
+    department: "الهندسة الميكانيكية",
+    location: "أتلانتا، جورجيا",
+    startYear: "2015",
+    endYear: "2018",
+    responsibilities: []
+  },
+  {
+    title: "طالب دراسات عليا",
+    organization: "معهد جورجيا للتكنولوجيا",
+    department: "الهندسة الميكانيكية - مختبر التحكم المتقدم بالرافعات",
+    location: "أتلانتا، جورجيا، الولايات المتحدة الأمريكية",
+    startYear: "2012",
+    endYear: "2018",
+    responsibilities: []
+  },
+  {
+    title: "قائد فريق RescueBot",
+    organization: "معهد جورجيا للتكنولوجيا",
+    department: "كلية الهندسة الميكانيكية",
+    location: "أتلانتا، جورجيا، الولايات المتحدة الأمريكية",
     startYear: "2013",
     endYear: "2016",
     responsibilities: []
@@ -61,18 +88,18 @@ export const academicExperienceAr = [
     title: "زميل باحث",
     organization: "معهد ماساتشوستس للتكنولوجيا (MIT)",
     department: "مختبر أبحاث الميكاترونكس",
-    location: "كامبريدج، ماساتشوستس",
+    location: "كامبريدج، ماساتشوستس، الولايات المتحدة الأمريكية",
     startYear: "2014",
     endYear: "2018",
     responsibilities: []
   },
   {
-    title: "زميل باحث",
+    title: "طالب زائر",
     organization: "معهد ماساتشوستس للتكنولوجيا (MIT)",
     department: "مختبر أبحاث الميكاترونكس",
     location: "كامبريدج، ماساتشوستس",
-    startYear: "Jun 2014",
-    endYear: "Aug 2014",
+    startYear: "يونيو 2014",
+    endYear: "أغسطس 2014",
     responsibilities: []
   }
 ];
@@ -82,15 +109,15 @@ export const industryExperienceAr = [
     title: "مهندس ميكانيكي متخصص",
     organization: "BP",
     location: "مسقط، عُمان",
-    startYear: "Feb 2011",
-    endYear: "Dec 2011",
+    startYear: "فبراير 2011",
+    endYear: "ديسمبر 2011",
     responsibilities: []
   }
 ];
 
 export const publicationsAr = [
   {
-    title: "مقالات علمية محكمة مختارة",
+    title: "مقالات مجلات علمية مختارة",
     publications: [
       {
         authors: "A Alshaya, A AlSaibie, A Alshayji",
@@ -103,7 +130,7 @@ export const publicationsAr = [
     ]
   },
   {
-    title: "أوراق المؤتمرات المختارة",
+    title: "أوراق مؤتمرات مختارة",
     publications: [
       {
         authors: "Ali AlSaibie, Arto Kivila, James Potter, William Singhose",
@@ -126,28 +153,28 @@ export const publicationsAr = [
 
 export const coursesAr = [
   {
-    category: "أستاذ مساعد، جامعة الكويت (2019 – الحالي)",
+    category: "أستاذ مساعد، جامعة الكويت (2019 - للآن)",
     items: [
       {
         code: "ME 319",
         title: "Mechatronics",
         semester: "S19, S20, S21, S22",
         credits: 0,
-        description: "الميكاترونكس - https://alsaibie.github.io/me319/"
+        description: "الميكاترونكس - https://alsaibie.github.io/me319"
       },
       {
         code: "ME 417", 
         title: "Control of Mechanical Systems",
         semester: "F19, S20, SS20, F20, S21",
         credits: 0,
-        description: "التحكم في الأنظمة الميكانيكية - https://alsaibie.github.io/me417/"
+        description: "التحكم في الأنظمة الميكانيكية - https://alsaibie.github.io/me417"
       },
       {
         code: "ENG 203",
         title: "Dynamics",
         semester: "S19, F19, F20, SS21, F21, F23, SS24", 
         credits: 0,
-        description: "الديناميكا - محاضرات صيف 2021"
+        description: "الديناميكا"
       },
       {
         code: "ME 459",
@@ -166,28 +193,28 @@ export const coursesAr = [
     ]
   },
   {
-    category: "مساعد تدريس الدراسات العليا، معهد جورجيا للتكنولوجيا (2015-2018)",
+    category: "مساعد مدرس، معهد جورجيا للتكنولوجيا (2015-2018)",
     items: [
       {
         code: "ME 4447/6405",
         title: "Introduction to Mechatronics",
         semester: "F15, F16",
         credits: 0,
-        description: "مقدمة في الميكاترونكس - مساعد تدريس رئيسي"
+        description: "مقدمة في الميكاترونكس - مساعد مدرس رئيسي"
       },
       {
         code: "ME 6408", 
         title: "Advanced Mechatronics",
         semester: "S16, S17, S18",
         credits: 0,
-        description: "الميكاترونكس المتقدم - مساعد تدريس رئيسي"
+        description: "الميكاترونكس المتقدم - مساعد مدرس رئيسي"
       },
       {
         code: "ME 6404",
         title: "Advanced Control Design and Implementation",
         semester: "F17",
         credits: 0,
-        description: "التصميم والتنفيذ المتقدم للتحكم - مساعد تدريس"
+        description: "التصميم والتنفيذ المتقدم للتحكم - مساعد مدرس"
       }
     ]
   }
@@ -195,7 +222,7 @@ export const coursesAr = [
 
 export const skillCategoriesAr = [
     {
-        name: "التصميم والتصنيع والنمذجة السريعة",
+        name: "التصميم والتصنيع والنمذجة",
         skills: [
             "CAD/CAM: Solidworks, Fusion 360, AutoCAD", 
             "Conventional Machining: Manual Lathes, Milling Machines", 

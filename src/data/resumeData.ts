@@ -56,7 +56,7 @@ export const academicExperience = [
     ]
   },
   {
-    title: "Graduate Research Assistant",
+    title: "Graduate Teaching Assistant",
     organization: "Georgia Institute of Technology",
     department: "School of Mechanical Engineering",
     location: "Atlanta, GA",
@@ -121,7 +121,7 @@ export const academicExperience = [
     ]
   },
   {
-    title: "Research Affiliate",
+    title: "Visiting Student",
     organization: "Massachusetts Institute of Technology (MIT)",
     department: "Mechatronics Research Lab",
     location: "Cambridge, MA",
