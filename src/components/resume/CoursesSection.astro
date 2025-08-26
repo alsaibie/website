@@ -28,6 +28,11 @@ const t = getTranslation(language);
     {t.teachingExperience}
   </h2>
   
+  <!-- Semester abbreviation legend -->
+  <div class={`text-xs text-black/60 dark:text-white/60 ${language === 'ar' ? 'text-left' : 'text-left'}`} dir="ltr">
+    {language === 'ar' ? 'F: الفصل الأول (خريف)، S: الفصل الثاني (ربيع)، SS: الفصل الصيفي' : 'F: Fall, S: Spring, SS: Summer'}
+  </div>
+  
   <div class="space-y-8">
     {courses.map((category) => (
       <div class="space-y-4">
