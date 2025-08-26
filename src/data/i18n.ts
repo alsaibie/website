@@ -30,6 +30,7 @@ export interface Translation {
   publications: string;
   skills: string;
   teachingExperience: string;
+  advisor: string;
   saveCVPDF: string;
   present: string;
   
@@ -73,6 +74,7 @@ export const translations: Record<string, Translation> = {
     publications: "Publications",
     skills: "Skills",
     teachingExperience: "Teaching Experience",
+    advisor: "Advisor",
     saveCVPDF: "Save CV PDF",
     present: "Present",
     
@@ -114,7 +116,8 @@ export const translations: Record<string, Translation> = {
     education: "التعليم",
     publications: "المنشورات البحثية",
     skills: "المهارات",
-    teachingExperience: "الخبرة التدريسية", 
+    teachingExperience: "الخبرة التدريسية",
+    advisor: "المشرف",
     saveCVPDF: "تحميل السيرة الذاتية",
     present: "مستمر",
     

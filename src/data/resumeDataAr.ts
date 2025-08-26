@@ -22,7 +22,7 @@ export const educationAr = [
     institution: "معهد جورجيا للتكنولوجيا",
     year: "2018",
     details: "أطروحة الدكتوراه: \"التصميم الميكاترونكي للمركبات الغواصة الذاتية الصغيرة للمساحات المحدودة\"",
-    advisor: "وليام سينغوز"
+    advisor: "William Singhose"
   },
   {
     degree: "ماجستير",

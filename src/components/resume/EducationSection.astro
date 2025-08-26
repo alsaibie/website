@@ -32,7 +32,7 @@ const t = getTranslation(language);
         </h3>
         <p class="text-black/70 dark:text-white/70">{item.institution} • {item.year}</p>
         {item.details && <p class="mt-2 text-sm">{item.details}</p>}
-        {item.advisor && <p class="text-sm text-black/60 dark:text-white/60">Advisor: {item.advisor}</p>}
+        {item.advisor && <p class="text-sm text-black/60 dark:text-white/60">{t.advisor}: {item.advisor}</p>}
         {item.gpa && <p class="mt-2 text-sm">{item.gpa}</p>}
       </div>
     ))}
