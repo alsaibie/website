@@ -1,0 +1,29 @@
+---
+import { SOCIALS } from "../data/socialsData";
+import Link from "./Link.astro";
+import { SITE } from "../consts";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class={`flex flex-wrap gap-4 justify-center ${className || ''}`}>
+  {
+    SOCIALS.map((SOCIAL) => (
+      <div class="flex items-center justify-center p-2 rounded border border-black/10 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+        <Link
+          href={SOCIAL.HREF}
+          external
+          underline={false}
+          aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
+        >
+          <Fragment set:html={SOCIAL.ICON} />
+          <span class="sr-only">{SOCIAL.NAME}</span>
+        </Link>
+      </div>
+    ))
+  }
+</div>

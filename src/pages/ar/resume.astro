@@ -9,6 +9,7 @@ import LinkedInExperienceSection from "../../components/resume/IndustryExperienc
 import PublicationsSection from "../../components/resume/PublicationsSection.astro";
 import CoursesSection from "../../components/resume/CoursesSection.astro";
 import SkillsSection from "../../components/resume/SkillsSection.astro";
+import SocialIcons from "../../components/SocialIcons.astro";
 
 import { 
   avatarDataAr, 
@@ -36,6 +37,11 @@ const t = getTranslation(lang);
         <PublicationsSection categories={publicationsAr} language={lang} />
         <CoursesSection courses={coursesAr} language={lang} />
         <SkillsSection skillCategories={skillCategoriesAr} language={lang} />
+        
+        <!-- Social Icons -->
+        <section class="animate">
+          <SocialIcons class="mt-8" />
+        </section>
       </div>
     </div>
   </Container>

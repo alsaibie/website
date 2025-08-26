@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import Container from "../../../components/Container.astro";
+import ArrowCard from "../../../components/ArrowCard.astro";
+import BackToPrevious from "../../../components/BackToPrevious.astro";
+import { getTranslation } from "../../../data/i18n";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("writing", ({ data }) => !data.draft);
+
+  // Get unique tags
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))];
+
+  // Create paths for each tag
+  return tags.map((tag) => ({
+    params: { id: tag },
+    props: {
+      posts: posts.filter((post) => post.data.tags?.includes(tag)),
+    },
+  }));
+}
+
+const { id } = Astro.params;
+const { posts } = Astro.props;
+
+const lang = "ar";
+const t = getTranslation(lang);
+
+// Sort posts by date, most recent first
+const sortedPosts = posts.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+);
+---
+
+<Layout title={`العلامة: ${id}`} description={`المقالات مع العلامة: ${id}`} language={lang}>
+  <Container>
+    <div class="space-y-10" data-pagefind-ignore dir="rtl">
+      <BackToPrevious href="/ar/tags"> جميع العلامات </BackToPrevious>
+      <h1 class="animate font-semibold text-black dark:text-white">
+        المقالات مع العلامة "{id}"
+      </h1>
+      <ul class="animate flex flex-col gap-4">
+        {sortedPosts.map((post) => <ArrowCard entry={post} />)}
+      </ul>
+    </div>
+  </Container>
+</Layout>

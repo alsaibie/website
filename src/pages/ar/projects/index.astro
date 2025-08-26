@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import Container from "../../../components/Container.astro";
+import ArrowCard from "../../../components/ArrowCard.astro";
+import SocialIcons from "../../../components/SocialIcons.astro";
+import { getTranslation } from "../../../data/i18n";
+
+const lang = "ar";
+const t = getTranslation(lang);
+
+const projects = (await getCollection("projects"))
+  .filter((project) => !project.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title={t.projects} description={t.projectsDescription} language={lang}>
+  <Container>
+    <aside data-pagefind-ignore>
+      <div class="space-y-10" dir="rtl">
+        <div class="animate font-semibold text-black dark:text-white">
+          {t.projects}
+        </div>
+        <ul class="animate not-prose flex flex-col gap-4">
+          {
+            projects.map((project) => (
+              <li>
+                <ArrowCard entry={project} />
+              </li>
+            ))
+          }
+        </ul>
+        
+        <!-- Social Icons -->
+        <div class="animate mt-10">
+          <SocialIcons />
+        </div>
+      </div>
+    </aside>
+  </Container>
+</Layout>

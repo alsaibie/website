@@ -6,7 +6,12 @@ import { getTranslation } from "@data/i18n";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { SITE } from "@consts";
 
-const currentLocale = Astro.currentLocale || "en";
+interface Props {
+  language?: string;
+}
+
+const { language } = Astro.props;
+const currentLocale = language || Astro.currentLocale || "en";
 const t = getTranslation(currentLocale);
 const isRtl = currentLocale === "ar";
 ---

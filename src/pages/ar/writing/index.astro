@@ -1,0 +1,64 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import Container from "../../../components/Container.astro";
+import ArrowCard from "../../../components/ArrowCard.astro";
+import SocialIcons from "../../../components/SocialIcons.astro";
+import { getTranslation } from "../../../data/i18n";
+
+const lang = "ar";
+const t = getTranslation(lang);
+
+const data = (await getCollection("writing"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+type Acc = {
+  [year: string]: CollectionEntry<"writing">[];
+};
+
+const posts = data.reduce((acc: Acc, post) => {
+  const year = post.data.date.getFullYear().toString();
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(post);
+  return acc;
+}, {});
+
+const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
+---
+
+<Layout title={t.writing} description={t.writingDescription} language={lang}>
+  <Container>
+    <aside data-pagefind-ignore>
+      <div class="space-y-10" dir="rtl">
+        <div class="space-y-4">
+          {
+            years.map((year) => (
+              <section class="animate space-y-4">
+                <div class="font-semibold text-black dark:text-white">
+                  {year}
+                </div>
+                <div>
+                  <ul class="not-prose flex flex-col gap-4">
+                    {posts[year].map((post) => (
+                      <li>
+                        <ArrowCard entry={post} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </section>
+            ))
+          }
+        </div>
+        
+        <!-- Social Icons -->
+        <div class="animate mt-10">
+          <SocialIcons />
+        </div>
+      </div>
+    </aside>
+  </Container>
+</Layout>
