@@ -25,16 +25,30 @@ const { title, experiences, borderColor = "blue-500/50" } = Astro.props;
   <div class="space-y-6">
     {experiences.map((item) => (
       <div class={`border-l-4 border-${borderColor} pl-4`}>
-        <div class="flex flex-wrap items-start justify-between gap-2">
-          <div class="flex-1">
+        <div>
+          <!-- Mobile layout: stacked -->
+          <div class="block md:hidden">
             <h3 class="text-lg font-semibold leading-tight">{item.title}</h3>
             <p class="text-black/70 dark:text-white/70">
               {item.department && `${item.department} • `}{item.organization}
             </p>
+            <span class="text-sm text-black/60 dark:text-white/60 mt-1 block">
+              {item.startYear} - {item.current ? "Present" : item.endYear}
+            </span>
           </div>
-          <span class="text-sm text-black/60 dark:text-white/60 flex-shrink-0 pt-0.5">
-            {item.startYear} - {item.current ? "Present" : item.endYear}
-          </span>
+          
+          <!-- Desktop layout: flex -->
+          <div class="hidden md:flex md:items-start md:justify-between md:gap-2">
+            <div class="flex-1">
+              <h3 class="text-lg font-semibold leading-tight">{item.title}</h3>
+              <p class="text-black/70 dark:text-white/70">
+                {item.department && `${item.department} • `}{item.organization}
+              </p>
+            </div>
+            <span class="text-sm text-black/60 dark:text-white/60 flex-shrink-0 pt-0.5">
+              {item.startYear} - {item.current ? "Present" : item.endYear}
+            </span>
+          </div>
         </div>
         <ul class="mt-2 space-y-1 text-sm">
           {item.responsibilities.map((responsibility) => (

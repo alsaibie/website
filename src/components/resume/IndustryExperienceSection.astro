@@ -104,10 +104,7 @@ sortedOrganizations.forEach(org => {
                     
                     <!-- Arabic Desktop layout: flex -->
                     <div class="hidden md:flex md:items-start md:justify-between md:gap-2">
-                      <span class="text-sm text-black/60 dark:text-white/60 flex-shrink-0 pt-0.5 order-1">
-                        {position.startYear} - {position.current ? t.present : position.endYear}
-                      </span>
-                      <div class="flex-1 order-2">
+                      <div class="flex-1 text-right">
                         <h4 class="text-lg font-medium text-black dark:text-white leading-tight">{position.title}</h4>
                         {position.department && (
                           <p class="text-sm text-black/70 dark:text-white/70 mt-1">{position.department}</p>
@@ -116,6 +113,9 @@ sortedOrganizations.forEach(org => {
                           <p class="text-sm text-black/60 dark:text-white/60 mt-1">{position.location}</p>
                         )}
                       </div>
+                      <span class="text-sm text-black/60 dark:text-white/60 flex-shrink-0 pt-0.5">
+                        {position.startYear} - {position.current ? t.present : position.endYear}
+                      </span>
                     </div>
                   </>
                 ) : (
