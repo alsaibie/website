@@ -24,7 +24,8 @@ export const education = [
     institution: "Georgia Institute of Technology",
     year: "2018",
     details: "Dissertation: \"Mechatronic Design of Micro Autonomous Underwater Vehicles for confined Spaces\"",
-    advisor: "William Singhose"
+    advisor: "William Singhose",
+    thesisUrl: "http://hdl.handle.net/1853/60770"
   },
   {
     degree: "M.S.",

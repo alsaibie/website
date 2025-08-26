@@ -21,8 +21,9 @@ export const educationAr = [
     field: "الهندسة الميكانيكية",
     institution: "معهد جورجيا للتكنولوجيا",
     year: "2018",
-    details: "أطروحة الدكتوراه: \"التصميم الميكاترونكي للمركبات الغواصة الذاتية الصغيرة للمساحات المحدودة\"",
-    advisor: "William Singhose"
+    details: "أطروحة الدكتوراه: \"التصميم الميكاترونكي للمركبات الغواصة الصغيرة ذاتية التحكم للمساحات المغلقة\"",
+    advisor: "William Singhose",
+    thesisUrl: "http://hdl.handle.net/1853/60770"
   },
   {
     degree: "ماجستير",
