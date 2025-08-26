@@ -275,28 +275,28 @@ export const coursesAr = [
 
 export const skillCategoriesAr = [
     {
-        name: "التصميم والتصنيع والنمذجة",
+        name: "التصميم والتصنيع والنمذجة السريعة",
         skills: [
-            "CAD/CAM: Solidworks, Fusion 360, AutoCAD", 
-            "Conventional Machining: Manual Lathes, Milling Machines", 
-            "CNC Machining & Cutting: Fanuc, Tormach, Omax, Lightburn, Cypcut", 
-            "Additive Manufacturing: FFF, SLS, SLA", 
-            "PCB Design & Fabrication: Altium Designer, Eagle CAD, KiCAD",
-            "Other Prototyping: Woodworking, Rubber Molding, Powder Coating",
+            "التصميم بمساعدة الحاسوب والتصنيع: Solidworks, Fusion 360, AutoCAD", 
+            "التصنيع التقليدي: Manual Lathes, Milling Machines", 
+            "التصنيع الرقمي - التناقصي: Fanuc, Tormach, Omax, Lightburn, Cypcut", 
+            "التصنيع الرقمي - الإضافي: FFF, SLS, SLA", 
+            "تصميم وتصنيع الدوائر الالكترونية: Altium Designer, Eagle CAD, KiCAD",
+            "مهارات نمذجة أخرى: Woodworking, Rubber Molding, Powder Coating",
         ],
         color: "blue"
     },
     {
         name: "البرمجيات والأنظمة",
         skills: [
-            "Programming & Scripting Languages: Python, C/C++, Julia, MATLAB, Structured Text", 
-            "Robotics & OS Frameworks: ROS/ROS2, MicroROS, Optitrack Motive, PX4, Ardupilot, Mujoco, CoppeliaSim, Qt", 
-            "Computer Vision: OpenCV, MATLAB Image Processing", 
-            "Embedded Systems: Arduino, Raspberry Pi, Jetson, STM32 HAL & Cube, TI Tiva C, Nuttx, FreeRTOS", 
-            "Industrial Automation: Siemens PLCs, Siemens Simotion",
-            "Web Development: Drupal (Site Building), Django, CSS, HTML",
-            "Development Tools & Infrastructure: Git/GitHub, Docker, CI/CD Pipelines",
-            "Cloud Platforms: AWS, Digital Ocean"
+            "لغات البرمجة: Python, C/C++, Julia, MATLAB, Structured Text", 
+            "أطر عمل الروبوتات ونظم التشغيل: ROS/ROS2, MicroROS, Optitrack Motive, PX4, Ardupilot, Mujoco, CoppeliaSim, Qt", 
+            "الرؤية الحاسوبية ومعالجة الصور: OpenCV, MATLAB Image Processing", 
+            "الأنظمة المدمجة: Arduino, Raspberry Pi, Jetson, STM32 HAL & Cube, TI Tiva C, Nuttx, FreeRTOS", 
+            "الأتمتة الصناعية: Siemens PLCs, Siemens Simotion",
+            "تطوير الويب: Drupal (Site Building), Django, CSS, HTML",
+            "أدوات التطوير والبنية التحتية: Git/GitHub, Docker, CI/CD Pipelines",
+            "منصات الحوسبة السحابية: AWS, Digital Ocean"
         ],
         color: "purple"
     },
@@ -304,19 +304,19 @@ export const skillCategoriesAr = [
         name: "التحليل الهندسي والمحاكاة",
         skills: [
             "Finite Element Analysis: ANSYS-CFX, COMSOL Multiphysics", 
-            "System Dynamics & Control: ODE/PDE Solvers, Controller Modeling and Design", 
-            "Motion Control: Servo Systems, PID Controllers, FOC Controllers", 
-            "Vibration Analysis: Condition Monitoring, Signal Processing"
+            "ديناميكيات الأنظمة والتحكم: ODE/PDE Solvers, Controller Modeling and Design", 
+            "النظم التحكم الحركية: Servo Systems, PID Controllers, FOC Controllers", 
+            "تحليل الاهتزازات: Condition Monitoring, Signal Processing"
         ],
         color: "orange"
     },
     {
         name: "علوم البيانات والتعلم الآلي",
         skills: [
-            "Data Analysis: Python (Pandas, NumPy, Matplotlib, Seaborn)",
-            "Machine Learning: Scikit-learn, Statistical Analysis, Regression Models",
-            "Deep Learning: TensorFlow, PyTorch, Neural Networks",
-            "Data Visualization: Plotly, Jupyter Notebooks",
+            "تحليل البيانات: Python (Pandas, NumPy, Matplotlib, Seaborn)",
+            "التعلم الآلي: Scikit-learn, Statistical Analysis, Regression Models",
+            "التعلم العميق: TensorFlow, PyTorch, Neural Networks",
+            "عرض البيانات: Plotly, Jupyter Notebooks",
         ],
         color: "green"
     }

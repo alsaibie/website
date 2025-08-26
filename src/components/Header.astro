@@ -13,13 +13,13 @@ const isRtl = currentLocale === "ar";
 
 <header transition:persist>
   <Container>
-    <div class={`flex flex-wrap gap-y-2 ${isRtl ? 'flex-row-reverse justify-between' : 'justify-between'}`}>
+    <div class={`flex flex-wrap gap-y-2 items-center ${isRtl ? 'flex-row-reverse justify-between' : 'justify-between'}`}>
       <Link href={getRelativeLocaleUrl(currentLocale, "/")} underline={false}>
         <div class="font-semibold">
           {t.siteTitle}
         </div>
       </Link>
-      <nav class="flex items-center gap-1 text-sm">
+      <nav class={`flex items-center gap-1 text-sm ${isRtl ? 'flex-row-reverse' : ''}`}>
         <Link href={getRelativeLocaleUrl(currentLocale, "/writing")}>{t.writing}</Link>
         <span>
           {`/`}
