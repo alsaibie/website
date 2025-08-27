@@ -167,7 +167,7 @@ export const industryExperience = [
     organization: "BP",
     location: "Ain Amenas, Algeria",
     startYear: "Sep 2007",
-    endYear: "Jan 2011", 
+    endYear: "Aug 208", 
     responsibilities: [
     //   "Designed and implemented control systems",
     //   "Performed system integration and testing",
@@ -286,14 +286,14 @@ export const courses = [
         // description: "Summer 2021 Lectures"
       },
       {
+        code: "ME 259",
+        title: "Introduction to Engineering Design",
+        semester: "S25",
+      },
+      {
         code: "ENG 307",
         title: "Numerical Methods and Programming for Engineers",
         semester: "F19, F23, S24",
-      },
-      {
-        code: "ENG 259",
-        title: "Introduction to Engineering Design",
-        semester: "S25",
       },
       {
         code: "ENG 104",

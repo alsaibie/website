@@ -127,7 +127,7 @@ export const industryExperienceAr = [
     organization: "BP",
     location: "عين أميناس، الجزائر",
     startYear: "سبتمبر 2007",
-    endYear: "يناير 2011", 
+    endYear: "أغسطس 2008", 
     responsibilities: []
   },
   {
@@ -217,18 +217,18 @@ export const coursesAr = [
         description: "الميكاترونكس - https://alsaibie.github.io/me319"
       },
       {
+        code: "ME 259",
+        title: "Introduction to Engineering Design",
+        semester: "S25",
+        credits: 0,
+        description: "مقدمة في التصميم الهندسي"
+      },
+      {
         code: "ENG 307",
         title: "Numerical Methods and Programming for Engineers",
         semester: "F19, F23, S24",
         credits: 0,
         description: "الطرق العددية والبرمجة للمهندسين"
-      },
-      {
-        code: "ENG 259",
-        title: "Introduction to Engineering Design",
-        semester: "S25",
-        credits: 0,
-        description: "مقدمة في التصميم الهندسي"
       },
       {
         code: "ENG 203",
