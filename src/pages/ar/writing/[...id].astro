@@ -57,10 +57,10 @@ const t = getTranslation(lang);
 
 <Layout title={post.data.title} description={post.data.description} language={lang}>
   <Container>
-    <div class="animate" dir="rtl">
+    <div class="animate" dir={post.data.language === 'ar' ? 'rtl' : 'ltr'}>
       <BackToPrevious href="/ar/writing">{t.writing} العودة إلى</BackToPrevious>
     </div>
-    <div class="my-10 space-y-1" dir="rtl">
+    <div class="my-10 space-y-1" dir={post.data.language === 'ar' ? 'rtl' : 'ltr'}>
       <div class="animate flex items-center gap-1.5">
         <div class="font-base text-sm">
           <FormattedDate date={post.data.date} />
@@ -90,8 +90,8 @@ const t = getTranslation(lang);
         ) : null
       }
     </div>
-    {headings.length > 0 && <TableOfContents headings={headings} />}
-    <article class="animate" dir="rtl">
+    {(post.data.toc ?? true) && headings.length > 0 && <TableOfContents headings={headings} />}
+    <article class="animate" dir={post.data.language === 'ar' ? 'rtl' : 'ltr'}>
       <Content />
       <div class="mt-24">
         <PostNavigation prevPost={prevPost} nextPost={nextPost} />
