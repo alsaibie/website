@@ -14,23 +14,25 @@ import Callout from "@/components/Callout.astro";
 ---
 
 
-Engineering education has, over the past few decades, drifted steadily toward the abstract. Simulation, analysis, and advanced theory dominate most curricula. Students spend years learning equations, coding models, or calculating stress states before they are ever asked to build something tangible. The result is a generation of engineers who can analyze, but often cannot prototype; who can describe, but hesitate when handed a piece of material, a tool, or a circuit.
+Engineering education has drifted toward the abstract. Simulation, analysis, and advanced theory dominate most curricula. Students spend years with equations and code before they are asked to build something tangible. The result: engineers who can analyze but hesitate when handed material, tools, or circuits. When hands-on experience is sidelined, the connection between theory and practice breaks — and it is very hard to rebuild later.
 
-This is not a criticism of theory. Without it, design would collapse into trial-and-error tinkering. But when the pendulum swings too far, when hands-on experience is sidelined, the connection between theory and practice is broken. And once broken, that connection is very hard to rebuild at the senior level or in the workplace.
+This realization hit even top universities by the late 2000s. By the early 2010s, the change was visible everywhere. At Georgia Tech, the [Invention Studio](https://inventionstudio.gatech.edu/)  became a model: a student-run makerspace that gave engineering students access to 3D printers, mills, lathes, laser cutters, and electronics benches - and it was fascinating to witness the expansion of the space from a single tiny room to almost the full floor of the MARC building within a span of 4 years.
 
-This realization hit even top universities by the late 2000s. By the early 2010s, the change was visible everywhere. At Georgia Tech, the [Invention Studio](https://inventionstudio.gatech.edu/)  became a model: a student-run makerspace that gave engineering students access to 3D printers, mills, lathes, laser cutters, and electronics benches. At [MIT](https://make.mit.edu/makerspaces), the Hobby Shop and Edgerton Center evolved into open-access labs for experimentation. [Stanford's](https://maker.stanford.edu/) Product Realization Lab adopted a similar ethos. In Europe, universities in Germany, the Netherlands, and Scandinavia invested heavily in “student labs” that combined mechanical and electrical prototyping with digital manufacturing.
+At [MIT](https://make.mit.edu/makerspaces), the Hobby Shop and Edgerton Center evolved into open-access labs for experimentation. [Stanford's](https://maker.stanford.edu/) Product Realization Lab adopted a similar ethos. In Europe, universities in Germany, the Netherlands, and Scandinavia invested heavily in “student labs” that combined mechanical and electrical prototyping with digital manufacturing.
 
 This was not just a Western phenomenon. Universities in the Middle East and Asia began introducing their own makerspaces. [KAUST](https://corelabs.kaust.edu.sa/labs/detail/prototyping-product-development-core-lab) in Saudi Arabia built its own fabrication core labs. [American University of Sharjah](https://www.aus.edu/media/news/cen-makerspace-at-aus-fostering-innovation-and-hands-on-learning-in-engineering-education) launched hands-on design centers. Even smaller institutions realized that student engagement, retention, and innovation all improved when students could see and touch the results of their learning.
 
-The movement was tied to the maker revolution outside academia. Arduino boards, low-cost 3D printers, and accessible software spread widely after 2010. Suddenly, design iteration that once required a full machine shop could be done on a student budget in a single afternoon. The democratization of hardware blurred the boundary between hobbyists and engineers — and universities had to adapt.
+The movement was tied to the maker revolution outside academia. Arduino boards, low-cost 3D printers, and accessible open-source software spread widely after 2010. Suddenly, design iteration that once required a full machine shop could be done on a student budget in a single afternoon. The democratization of hardware blurred the boundary between hobbyists and engineers — and universities had to adapt.
 
 ## The Local Context: Why Kuwait Faces Extra Challenges
 
-In Kuwait, the need for hands-on education has always been understood, but the obstacles are different. Unlike the US or Europe, Kuwait does not have a deep DIY culture to draw on - it has been eroded over decades for obvious reasons. In the West, garages, basements, and community shops filled the gap between what universities provided and what students wanted. In Kuwait, low-cost foreign labor created a different dynamic: outsourcing small fabrication jobs was easy, and a thriving gig businesses developed around “one-stop shops” that build student projects. This is profitable for the shops and individuals making quite a bit of money (albeit unethical in my view), but deeply corrosive to education. Students learn to outsource rather than to design, build, and troubleshoot themselves.
+In Kuwait, the need for hands-on education has always been understood, but the obstacles are different. Unlike the US or Europe, Kuwait does not have a deep DIY culture to draw on - it has been eroded over decades brought by convenience and low cost labor economics. In the West, garages, basements, and general DIY at home attitude still lives - any visit to Home Depot or Lowe's can attest to that. Students in the west come into engineering programs with some tendency to tinker and make. 
+
+In Kuwait, on the other hand, low-cost foreign labor created a different dynamic: students grow up outsourcing simple fixes at home and that habit carries over. Outsourcing small fabrication jobs is easy, and a thriving gig-style businesses developed around “one-stop shops” that build student projects. This is profitable for the shops and individuals making quite a bit of money (albeit unethical in my view), but deeply corrosive to education. Students learn to outsource rather than to design, build, and troubleshoot themselves. To graduate engineers with real hands-on capabilities, we have to start by compensating for this weaker baseline of tinkering experience that students bring compared to their peers abroad.
 
 Inside the university, facilities also lagged. For years, the promise of the new campus kept investment in the old facilities frozen. The new campus itself became a moving target, delayed and stretched over a decade. Recruiting and retaining experienced hands-on technicians proved nearly impossible - and still is. Salaries, nationalization laws, career progression, and institutional culture did not encourage skilled machinists, electronics technicians, or lab managers to stay.
 
-The result was a vacuum. Students who wanted to build were trapped. Either they outsourced, or they improvised with weak tools and limited access, or they gave up. Senior projects in mechanical, electrical, and computer engineering — which are almost always mechatronics projects in disguise — suffered most. Purely mechanical or purely electrical projects are rare today. Integration is the norm. Yet the capacity to integrate comes only with practice.
+The result was a vacuum. Students who wanted to build were trapped. Either they outsourced, or they improvised with weak tools and limited access, or they gave up. Senior projects in mechanical, electrical, and computer engineering — which are almost always mechatronics projects in disguise — suffered most (i.e. systems involving sensors, actuators, and software). Purely mechanical or purely electrical projects are rare today. Integration is the norm. Yet the capacity to integrate comes only with practice. 
 
 ## Digital Manufacturing can be a Game Changer 
 
@@ -38,15 +40,17 @@ Digital manufacturing has lowered the entry barrier in a way that older technolo
 
 These tools don't replace skilled technicians or high-end facilities. Machining complex metal parts, building safe high-power systems, or creating robust control platforms still requires training and expertise - and are skills that are truly needed. But digital manufacturing changes the tempo of learning. Instead of weeks between idea and prototype, iteration can happen daily - the pace suitable for a projects within a semester, and the cost of failure is diminished significantly. This accelerates confidence, builds intuition, and makes engineering feel less abstract.
 
+The shift is not only about speed — it is about ownership. When students can design and print a part in a day, they stop seeing prototypes as distant or “out of reach.” Iteration becomes a habit, not a hurdle.
+
 And to be fair, this need was recognized long ago. Faculty pushed for better labs, more fabrication access, and modernized workshops. The reality, however, is that universities move at the speed of bureaucracy. Budgets, committees, and facilities planning mean that what should take years can take decades. That is frustrating, but it is also the nature of large public institutions.
 
 The good news: investment efforts have started showing results recently. The new campus has brought with it a wave of modernization. A dedicated makerspace is nearly complete. The advanced manufacturing center is midway through setup. The university has poured funds into modern labs. Yes, the delay was long, but the gap is closing. Better late than never.
 
-## A strategy that might work? InshaAllah.
+## A Strategy That Might Work (InshaAllah)
 
 Still, “build it and they will come” is not a strategy. The existence of a makerspace does not guarantee its use. Students accustomed to outsourcing won't suddenly change their habits because a 3D printer appears on campus. Culture shifts slowly, and facilities alone do not induce demand.
 
-That is why the new cornerstone course we've been planning *ENG201: Introduction to Design and Product Fabrication* is so important. It is one of the first engineering courses in Kuwait to embed design thinking, prototyping, and iteration directly into the curriculum. It is shared across four engineering programs, and it is designed to be literally a cornerstone — the course that lowers the barrier for students so that by the time they reach their capstone projects, “do it yourself” is the natural path, not the exception. We're excited to teach the first batch in Fall 2025.
+That is why the new cornerstone course we've been planning *ENG201: Introduction to Design and Product Fabrication* is so important. It is one of the first engineering courses in Kuwait to embed design thinking, prototyping, and iteration directly into the curriculum. It is shared across four engineering programs, and it is designed to be literally a cornerstone — the course that lowers the barrier for students so that by the time they reach their capstone projects, “do it yourself” is the natural path, not the exception. The first cohort will take the course in Fall 2025 — a small but important step toward embedding design culture in the curriculum.
 
 If we succeed, outsourcing will no longer be the default. Students will already have the skills, the confidence, and the facilities to tackle design challenges on their own.
 
@@ -67,12 +71,12 @@ AI cannot (not yet at least) turn a sketch into a welded frame, tune a motor PID
 
 Will this strategy work? We cannot know yet. Cultural habits do not change overnight, and outsourcing will not disappear completely. But if in the next few years we see even a double-digit percentage reduction in outsourced student projects, that is already a victory. It will mean more students choosing to build first, outsource second.
 
-The makerspace will not solve every problem. We still face the manpower challenge — the last frontier, the "level 8 boss battle.” Without skilled staff to maintain machines, mentor students, and keep labs safe, facilities risk falling into disrepair. But the direction is clear: progress is being made, and a cultural shift is underway.
+The makerspace will not solve every problem. We still face the manpower challenge — the last frontier, the toughest stage. Without skilled staff to maintain machines, mentor students, and keep labs safe, facilities risk falling into disrepair. But the direction is clear: progress is being made, and a cultural shift is underway.
 
 When the makerspace is fully open, I plan to share a tour here. Until then, the work continues — not just building machines and labs, but rebuilding the culture of engineering education itself.
 
 <Callout type="disclaimer" >
-Note: The work described here reflects the effort of many colleagues, staff, and students. I share my perspective as one participant, but these initiatives would not be possible without the collective contributions of the department and college.
+Note: The work described here reflects the effort of colleagues, staff, and students. I share my perspective as one participant, but these initiatives would not be possible without the collective contributions of the department and college.
 </Callout>
 
 <Callout type="info" title="Join the Conversation">
