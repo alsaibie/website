@@ -11,6 +11,7 @@ const writing = defineCollection({
     toc: z.boolean().optional(),
     tags: z.array(z.string()).optional(),
     language: z.enum(['en', 'ar']).optional(),
+    image: z.string().optional(),
   }),
 });
 
@@ -25,6 +26,7 @@ const projects = defineCollection({
     demoURL: z.string().optional(),
     repoURL: z.string().optional(),
     language: z.enum(['en', 'ar']).optional(),
+    image: z.string().optional(),
   }),
 });
 

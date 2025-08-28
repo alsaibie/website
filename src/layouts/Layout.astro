@@ -10,9 +10,10 @@ type Props = {
   title: string;
   description: string;
   language?: string;
+  image?: string;
 };
 
-const { title, description, language = 'en' } = Astro.props;
+const { title, description, language = 'en', image } = Astro.props;
 const isRtl = language === 'ar';
 const currentLocale = Astro.currentLocale || language;
 const t = getTranslation(currentLocale);
@@ -21,7 +22,7 @@ const t = getTranslation(currentLocale);
 <!doctype html>
 <html lang={language} dir={isRtl ? 'rtl' : 'ltr'} class={isRtl ? 'rtl' : ''}>
   <head>
-    <Head title={`${title} | ${t.siteTitle}`} description={description} />
+    <Head title={`${title} | ${t.siteTitle}`} description={description} image={image} />
   </head>
   <body>
     <noscript>

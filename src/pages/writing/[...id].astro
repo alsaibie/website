@@ -52,7 +52,7 @@ const post = Astro.props;
 const { Content, headings } = await render(post);
 ---
 
-<Layout title={post.data.title} description={post.data.description} language={post.data.language}>
+<Layout title={post.data.title} description={post.data.description} language={post.data.language} image={post.data.image}>
   <Container>
     <div class="animate">
       <BackToPrevious href="/writing">Back to Engineering Articles</BackToPrevious>

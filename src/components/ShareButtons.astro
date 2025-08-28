@@ -31,7 +31,7 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
     href={twitterUrl}
     target="_blank"
     rel="noopener noreferrer"
-    class="flex items-center justify-center w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-colors duration-200"
+    class="flex items-center justify-center w-8 h-8 rounded-sm bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-colors duration-200"
     title="Share on Twitter"
   >
     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -44,7 +44,7 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
     href={linkedinUrl}
     target="_blank"
     rel="noopener noreferrer"
-    class="flex items-center justify-center w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-colors duration-200"
+    class="flex items-center justify-center w-8 h-8 rounded-sm bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-colors duration-200"
     title="Share on LinkedIn"
   >
     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -57,7 +57,7 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
     href={facebookUrl}
     target="_blank"
     rel="noopener noreferrer"
-    class="flex items-center justify-center w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-colors duration-200"
+    class="flex items-center justify-center w-8 h-8 rounded-sm bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-colors duration-200"
     title="Share on Facebook"
   >
     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -68,7 +68,7 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
   <!-- Email -->
   <a
     href={emailUrl}
-    class="flex items-center justify-center w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-colors duration-200"
+    class="flex items-center justify-center w-8 h-8 rounded-sm bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-colors duration-200"
     title="Share via Email"
   >
     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -78,8 +78,8 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
 
   <!-- Copy Link -->
   <button
-    class="copy-link-btn flex items-center justify-center w-8 h-8 rounded-full bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-colors duration-200"
-    title="Copy Title & Link"
+    class="copy-link-btn share-copy-btn flex items-center justify-center w-8 h-8 rounded-sm bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/15 transition-colors duration-200"
+    title="Copy Link"
     data-url={currentUrl}
     data-title={title}
   >
@@ -90,50 +90,76 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const copyButtons = document.querySelectorAll('.copy-link-btn');
+  function initShareButtons() {
+    const copyButtons = document.querySelectorAll('.share-copy-btn');
     
     copyButtons.forEach(button => {
-      button.addEventListener('click', async function() {
-        const url = this.getAttribute('data-url');
-        const title = this.getAttribute('data-title');
-        const shareText = `${title}\n\n${url}`;
-        
-        try {
-          if (navigator.clipboard && window.isSecureContext) {
-            await navigator.clipboard.writeText(shareText);
-          } else {
-            // Fallback for older browsers
-            const textArea = document.createElement('textarea');
-            textArea.value = shareText;
-            textArea.style.position = 'fixed';
-            textArea.style.left = '-999999px';
-            textArea.style.top = '-999999px';
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            document.execCommand('copy');
-            textArea.remove();
-          }
-          
-          // Visual feedback
-          const originalContent = this.innerHTML;
-          this.innerHTML = `
-            <svg class="w-4 h-4 fill-current text-green-600" viewBox="0 0 24 24">
-              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-            </svg>
-          `;
-          
-          setTimeout(() => {
-            this.innerHTML = originalContent;
-          }, 2000);
-          
-        } catch (err) {
-          console.error('Failed to copy link: ', err);
-        }
-      });
+      // Remove existing listeners to prevent duplicates
+      button.removeEventListener('click', handleCopyClick);
+      button.addEventListener('click', handleCopyClick);
     });
-  });
+  }
+  
+  async function handleCopyClick(event: Event) {
+    const button = event.currentTarget as HTMLButtonElement;
+    const url = button.getAttribute('data-url');
+    
+    if (!url) {
+      console.error('No URL found to copy');
+      return;
+    }
+    
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(url);
+      } else {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = url;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        textArea.remove();
+      }
+      
+      // Visual feedback
+      const originalContent = button.innerHTML;
+      button.innerHTML = `
+        <svg class="w-4 h-4 fill-current text-green-600" viewBox="0 0 24 24">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
+      `;
+      
+      setTimeout(() => {
+        button.innerHTML = originalContent;
+      }, 2000);
+      
+    } catch (err) {
+      console.error('Failed to copy link: ', err);
+      
+      // Show error feedback
+      const originalContent = button.innerHTML;
+      button.innerHTML = `
+        <svg class="w-4 h-4 fill-current text-red-600" viewBox="0 0 24 24">
+          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      `;
+      
+      setTimeout(() => {
+        button.innerHTML = originalContent;
+      }, 2000);
+    }
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initShareButtons);
+  
+  // Re-initialize after Astro page transitions
+  document.addEventListener('astro:after-swap', initShareButtons);
 </script>
 
 <style>

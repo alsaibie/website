@@ -59,7 +59,7 @@ const t = getTranslation(lang);
 const textDirection = post.data.language === 'ar' ? 'rtl' : 'ltr';
 ---
 
-<Layout title={post.data.title} description={post.data.description} language={lang}>
+<Layout title={post.data.title} description={post.data.description} language={lang} image={post.data.image}>
   <Container>
     <div class="animate" dir={post.data.language === 'ar' ? 'rtl' : 'ltr'}>
       <BackToPrevious href="/ar/writing">{t.writing} العودة إلى</BackToPrevious>

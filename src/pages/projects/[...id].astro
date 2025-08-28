@@ -24,7 +24,7 @@ const project = Astro.props;
 const { Content, headings } = await render(project);
 ---
 
-<Layout title={project.data.title} description={project.data.description} language={project.data.language}>
+<Layout title={project.data.title} description={project.data.description} language={project.data.language} image={project.data.image}>
   <Container>
     <div class="animate">
       <BackToPrevious href="/projects">Back to projects</BackToPrevious>

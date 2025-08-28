@@ -27,7 +27,7 @@ const lang = "ar";
 const t = getTranslation(lang);
 ---
 
-<Layout title={project.data.title} description={project.data.description} language={lang}>
+<Layout title={project.data.title} description={project.data.description} language={lang} image={project.data.image}>
   <Container>
     <div class="animate" dir="rtl">
       <BackToPrevious href="/ar/projects">{t.projects} العودة إلى</BackToPrevious>
