@@ -1,0 +1,52 @@
+---
+import { getTranslation } from "../../data/i18n";
+
+export interface ServiceItem {
+  title: string;
+  description: string;
+}
+
+export interface Props {
+  title: string;
+  services: ServiceItem[];
+  borderColor?: string;
+  language?: string;
+}
+
+const { title, services, borderColor = "green-500/50", language = "en" } = Astro.props;
+const t = getTranslation(language);
+---
+
+<section class="animate space-y-4">
+  <h2 class="text-2xl font-bold text-black dark:text-white border-b border-black/10 dark:border-white/20 pb-2">
+    {title}
+  </h2>
+  <div class="space-y-6">
+    <div class="px-1 py-1 mt-0 mb-2">
+        Selected Activities
+    </div>
+    {services.map((service) => (
+      <div class={language === 'ar' ? `border-r-4 border-${borderColor} pr-4` : `border-l-4 border-${borderColor} pl-4`}>
+        <div>
+          {language === 'ar' ? (
+            <>
+              <!-- Arabic layout -->
+              <div class="text-right">
+                <h3 class="text-lg font-semibold text-black dark:text-white leading-tight mb-2">{service.title}</h3>
+                <p class="text-black/80 dark:text-white/80 text-sm leading-relaxed">{service.description}</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <!-- English layout -->
+              <div>
+                <h3 class="text-lg font-semibold text-black dark:text-white leading-tight mb-2">{service.title}</h3>
+                <p class="text-black/80 dark:text-white/80 text-sm leading-relaxed">{service.description}</p>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

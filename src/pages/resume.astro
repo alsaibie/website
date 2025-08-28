@@ -8,6 +8,7 @@ import AcademicExperienceSection from "@components/resume/AcademicExperienceSect
 import LinkedInExperienceSection from "@components/resume/IndustryExperienceSection.astro";
 import PublicationsSection from "@components/resume/PublicationsSection.astro";
 import CoursesSection from "@components/resume/CoursesSection.astro";
+import InstitutionalServiceSection from "@components/resume/InstitutionalServiceSection.astro";
 import SkillsSection from "@components/resume/SkillsSection.astro";
 import SocialIcons from "@components/SocialIcons.astro";
 // import AwardsSection from "@components/resume/AwardsSection.astro";
@@ -17,7 +18,8 @@ import {
   academicExperience, 
   industryExperience, 
   publications,
-  courses, 
+  courses,
+  institutionalService,
   skillCategories, 
   awards 
 } from "@data/resumeData";
@@ -46,6 +48,13 @@ import {
         <PublicationsSection categories={publications} language="en" />
         
         <CoursesSection courses={courses} language="en" />
+        
+        <InstitutionalServiceSection 
+          title="Institutional Innovation & Service" 
+          services={institutionalService} 
+          borderColor="purple-500/50"
+          language="en" 
+        />
         
         <SkillsSection skillCategories={skillCategories} language="en" />
         

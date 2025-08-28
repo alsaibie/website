@@ -8,6 +8,7 @@ import AcademicExperienceSection from "../../components/resume/AcademicExperienc
 import LinkedInExperienceSection from "../../components/resume/IndustryExperienceSection.astro";
 import PublicationsSection from "../../components/resume/PublicationsSection.astro";
 import CoursesSection from "../../components/resume/CoursesSection.astro";
+import InstitutionalServiceSection from "../../components/resume/InstitutionalServiceSection.astro";
 import SkillsSection from "../../components/resume/SkillsSection.astro";
 import SocialIcons from "../../components/SocialIcons.astro";
 
@@ -18,6 +19,7 @@ import {
   industryExperienceAr, 
   publicationsAr, 
   coursesAr, 
+  institutionalServiceAr,
   skillCategoriesAr 
 } from "../../data/resumeDataAr";
 
@@ -36,6 +38,12 @@ const t = getTranslation(lang);
         <LinkedInExperienceSection title="التجربة المهنية" experiences={industryExperienceAr} language={lang} />
         <PublicationsSection categories={publicationsAr} language={lang} />
         <CoursesSection courses={coursesAr} language={lang} />
+        <!-- <InstitutionalServiceSection 
+          title="الابتكار والخدمة المؤسسية" 
+          services={institutionalServiceAr} 
+          borderColor="purple-500/50"
+          language={lang} 
+        /> -->
         <SkillsSection skillCategories={skillCategoriesAr} language={lang} />
         
         <!-- Social Icons -->

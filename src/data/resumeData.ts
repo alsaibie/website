@@ -331,6 +331,40 @@ export const courses = [
 ];
 
 //
+// ------------- INSTITUTIONAL INNOVATION & SERVICE -------------
+//
+export const institutionalService = [
+  {
+    title: "Makerspace and Manufacturing Center",
+    description: "Drew on my experience at Georgia Tech's Invention Studio and years of tinkering to help establish the university's makerspace and advanced manufacturing center. Built it as a space for students to learn by making. Now focused on building operational sustainability."
+  },
+  {
+    title: "Computer-Based Entrance Exams",
+    description: "During COVID, helped moved entrance exams from paper to computer-based, still in use today. Later worked on infrastructure for a national exam project, now on hold."
+  },
+  {
+    title: "University Website Transition",
+    description: "Led the build of a Drupal prototype to replace the Oracle system. Advocated for user needs to be defined internally, and UI to be user-first. Prototype adopted successfully and implemented university wide after redesign by an external agency."
+  },
+  {
+    title: "Introduction to Design & Fabrication Course",
+    description: "With colleagues, developed a new common course that placed design thinking and fabrication at the core of the engineering program, giving students early hands-on experience. The course will be first taught in Fall 2025"
+  },
+  {
+    title: "Robotics and Mechatronics Teaching Lab",
+    description: "Designed and set up a lab to support robotics and mechatronics elective courses."
+  },
+  {
+    title: "Applied Control and Estimation Lab",
+    description: "Started a new lab for applied control and estimation. Built around a fully equipped mechatronics lab, a setup that started during my Ph.D. at Georgia Tech"
+  },
+  {
+    title: "Online Teaching Support (COVID-19)",
+    description: "When classrooms shut down, a small group of colleagues and I worked voluntarily to advocate and prepare for the online transition during COVID-19m from day one, later led the training on Moodle transition. Specially focused on assessment tools."
+  }
+];
+
+//
 // ------------- SKILLS -------------
 //
 export const skillCategories = [
