@@ -7,6 +7,7 @@ import { readingTime } from "../../../lib/utils";
 import BackToPrevious from "../../../components/BackToPrevious.astro";
 import PostNavigation from "../../../components/PostNavigation.astro";
 import TableOfContents from "../../../components/TableOfContents.astro";
+import ShareButtons from "../../../components/ShareButtons.astro";
 import Giscus from "../../../components/Giscus.astro";
 import { getTranslation } from "../../../data/i18n";
 
@@ -53,6 +54,9 @@ const { Content, headings } = await render(post);
 
 const lang = "ar";
 const t = getTranslation(lang);
+
+// Determine text direction based on post language, defaulting to LTR
+const textDirection = post.data.language === 'ar' ? 'rtl' : 'ltr';
 ---
 
 <Layout title={post.data.title} description={post.data.description} language={lang}>
@@ -91,12 +95,19 @@ const t = getTranslation(lang);
       }
     </div>
     {(post.data.toc ?? true) && headings.length > 0 && <TableOfContents headings={headings} />}
-    <article class="animate" dir={post.data.language === 'ar' ? 'rtl' : 'ltr'}>
+    <article class="animate" dir={textDirection}>
       <Content />
-      <div class="mt-24">
+      <div class="mt-8 pt-8 border-t border-black/10 dark:border-white/20">
+        <ShareButtons 
+          title={post.data.title}
+          description={post.data.description}
+          class="mb-8"
+        />
+      </div>
+      <div class="mt-16">
         <PostNavigation prevPost={prevPost} nextPost={nextPost} />
       </div>
-      <div class="mt-24">
+      <div class="mt-16">
         <Giscus />
       </div>
     </article>
